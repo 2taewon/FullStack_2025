@@ -1,0 +1,96 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready(function(){
+
+				//-----------------------------------------------------------
+				// before 써서 번호 붙이기
+				//-----------------------------------------------------------
+				$(".dogList tr:eq(0) th:eq(0)").before("<th>번호");
+				var no=1;
+				
+					var trObj = $(".dogList tr td");
+					trObj.each( function(){
+					$(this).before("<td>"+no++);
+				});
+/*
+				//-----------------------------------------------------------
+				// prepend 써서 번호 붙이기
+				//-----------------------------------------------------------
+				$(".dogList tr:eq(0)").prepend("<th>번호");
+				var no=1;
+				
+					var trObj = $(".dogList tr").next();
+					trObj.each( function(){
+					$(this).prepend("<td>"+no++);
+				});
+
+				//-----------------------------------------------------------
+
+				//-----------------------------------------------------------
+				// before 써서 역순으로 번호 붙이기
+				//-----------------------------------------------------------
+				$(".dogList tr:eq(0) th:eq(0)").before("<th>번호");
+
+				var no=$(".dogList tr").length-1;
+				
+					var trObj = $(".dogList tr td");
+					trObj.each( function(){
+					$(this).before("<td>"+no--);
+				});
+
+				
+				//-----------------------------------------------------------
+				// for문 써서 번호 붙이기
+				//-----------------------------------------------------------
+
+				$(".dogList tr:eq(0) th:eq(0)").before("<th>번호");
+				var no=1;
+				var length1 = $(".dogList tr").length;
+				
+				for ( var i =1; i<=length1; i++ ){
+					$(".dogList tr:eq("+i+")").prepend("<td>"+i);
+				}
+				//-----------------------------------------------------------
+				// for문 써서 번호 역순붙이기
+				//-----------------------------------------------------------
+				$(".dogList tr:eq(0) th:eq(0)").before("<th>번호");
+				
+				var length1 = $(".dogList tr").length;
+				var no = length1-1;
+				for ( var i =1; i<length1; i++ ){
+					$(".dogList tr:eq("+i+")").prepend("<td>"+ no--);
+				}
+				//-----------------------------------------------------------
+				// for문 써서 번호 역순붙이기
+				//-----------------------------------------------------------
+
+				$(".dogList tr:eq(0) th:eq(0)").before("<th>번호");
+				
+				var length1 = $(".dogList tr").length;
+				var cnt=1;
+				for ( var i =length1; i>0; i-- ){
+					
+					$(".dogList tr").eq(cnt++).prepend("<td>"+ i);
+				}
+*/
+
+			});
+		</script>
+	</head>
+	
+	<body><center>
+		<table class="dogList" border="1" cellpadding="4">
+		<tr><th bgcolor="gray">개이름
+		<tr><td>진돗개
+		<tr><td>세퍼드
+		<tr><td>비글
+		<tr><td>시바새끼
+		<tr><td>비글
+		<tr><td>시바새끼
+		
+		</table>
+	</body>
+</html>

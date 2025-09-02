@@ -1,0 +1,94 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<title>공부시작</title>
+		<script>
+			function getAlphbet(str){
+				var tmp = "";
+				var alphabet = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+				for (var i=0; i<str.length; i++){
+					var s = str.charAt(i);
+					if (alphabet.indexOf(s)>=0){
+						tmp = tmp + s;
+					}
+				}
+				return tmp;
+			}
+		</script>
+	</head>
+
+	<body>
+		<script>
+			var str = new String ("Made In Korea");
+			//----------------------------------------------------
+			// String 객체의 substring(~) 라는 메소드를 호출하여
+			// 일부 구간의 문자열을 리턴 받아본다.
+			//----------------------------------------------------
+			document.write(str.substring(8)+"<hr>");
+			document.write(str.substring(5,7)+"<hr>");
+			//----------------------------------------------------
+			// 인덱스 번호 8번에 해당하는 문자 1개만 복사해서 리턴
+			//----------------------------------------------------
+			document.write(str.charAt(8)+"<hr>");
+			document.write(str.substring(8,9)+"<hr>");
+			document.write(str.substr(8,1)+"<hr>");
+			//----------------------------------------------------
+			// indexOf(~) 메소드로 임의 문자의 존재 위치 인덱스
+			// 번호값 리턴하기 앞에서 부터 찾기 떄문에 2개 이상이면
+			// 첫번째 인덱스 번호 리턴
+			//----------------------------------------------------
+			document.write(str.indexOf("K")+"<hr>");
+			document.write(str.indexOf("k")+"<hr>");
+			document.write(str.indexOf("a")+"<hr>");
+			document.write(str.indexOf("a",3)+"<hr>");
+			//----------------------------------------------------
+
+			// lastIndexOf(~) 메소드로 뒤에서 부터 찾아 a 문자의
+			// 존재위치 인덱스 번호값 리턴
+			//----------------------------------------------------
+			document.write(str.lastIndexOf("a")+"<hr>");
+			//----------------------------------------------------
+			// 만약 Kor이라는 문자열이 있으면 한국제품 문자열 출력
+			//----------------------------------------------------
+			if (str.indexOf("Kor")>=0){
+				document.write("한국 제품<hr>");
+			}
+			//----------------------------------------------------
+			// String 객체 소유의 문자열을 복사해서 Korea 문자열을
+			// USA 문자열로 바꾸어 출력
+			//----------------------------------------------------
+			document.write(str.replace("Korea","USA")+"<hr>");
+			document.write(str+"<hr>");
+			//----------------------------------------------------
+			// String 객체 소유의 문자열을 복사해서 대문자로 출력
+			//----------------------------------------------------
+			document.write(str.toUpperCase()+"<hr>");
+			//----------------------------------------------------
+			// String 객체 소유의 문자열을 복사해서 소문자로 출력
+			//----------------------------------------------------
+			document.write(str.toLowerCase()+"<hr>");
+
+			var birth = "2000-02-16";
+			var year = birth.substring(0,4);
+			var month = birth.substring(5,7);
+			var day = birth.substring(8,10);
+			document.write(year+"년 "+month+"월 "+day+"일<hr>");
+
+			var births = birth.split("-");
+			document.write(births[0]+"년 "+births[1]+"월 "+births[2]+"일<hr>");
+
+			for (var i = 0; i<births.length; i++){
+				document.write(births[i]+" ");
+			}
+			document.write("<hr>");
+
+			//아래 문자열에서 영어 단어만 골라서 출력하면
+			var id = "abc1234hdk234fr#?!aASSD";
+			document.write(getAlphbet(id)+"<hr>");
+
+			var dog = " 셰퍼드 ";
+			dog = dog.trim();
+			document.write(dog.length+"<hr>");
+		</script>
+	</body>
+</html>

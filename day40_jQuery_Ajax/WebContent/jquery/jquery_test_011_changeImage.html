@@ -1,0 +1,121 @@
+<!-- 
+	=> 이미지에 마우스를 대면 지정한 곳에서 서서히 나타난다
+	=> hover( ), fadeTo()메소드를 숙지한다. 
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<style>
+			/*---------------------------------------------------------------------------*/
+			/* class=small 를 가진 태그 후손 중 img 태그에 CSS 설정                       */
+			/*---------------------------------------------------------------------------*/
+			.small img{ border:none; margin:10px; width:60px; height:60px; }
+			/*---------------------------------------------------------------------------*/
+			/* class=large 를 가진 태그에 CSS 설정                                           */
+			/*---------------------------------------------------------------------------*/
+			.large{ width:200px; height:200px; }
+			/*---------------------------------------------------------------------------*/
+			/* class=hover 를 가진 태그에 CSS 설정                                          */
+			/*---------------------------------------------------------------------------*/
+			.hover{ color:blue; background-color:#D3D3E9; }
+		</style>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				//-------------------------------------------------
+				// td 후손 중 p태그가 안은 무자열의 css 설정
+				//-------------------------------------------------
+				$(".shopping").find("td").find("p").css(
+					{"font-size":12, "font-weight":"bold"}
+				);
+					// 위 코드는 아래처럼도 가능
+					//$(".shopping").find("td").find("p").css("font-size", 12);
+					//$(".shopping").find("td").find("p").css("font-weight", "bold");
+				//-------------------------------------------------
+				// class=small 을 가진 태그에 마우스 대면, 때면 일어나는일 설정
+				//-------------------------------------------------
+				$(".shopping").find(".small").hover(
+					function(){
+						//-------------------------------------------------
+						// 마우스를 댄 놈의 부모 태그 즉 td에 class=hover를 삽입,
+						// 그러면 위 css가 예쁘게 해줌
+						// this는 마우스를 댄 놈을 가리키는 선택자이다.
+						//-------------------------------------------------
+						$(this).parent().addClass("hover");
+						// 마우스를 댄 a 태그의 href 속성값 얻기
+						var imgName = $(this).attr("href");
+						//-------------------------------------------------
+						//class=large 인 놈이 서서히 사라지고 난후
+						// src 속성에 마우스를 댄 a 태그의 href 속성값 바꾸기
+						//-------------------------------------------------
+						$(".large").fadeTo(
+							"slow",          // 투명도로 가는 속도
+							0,                // 투명도, 0이면 완전히 투명해서 안보임
+							function(){
+							$(".large").attr("src", imgName);
+						});
+						//-------------------------------------------------
+						// class=large인 놈이 서서히 나타나기
+						//-------------------------------------------------
+						$(".large").fadeTo("slow",1);
+						/*
+						//-------------------------------------------------
+						// 위 코드는 아래코드와 동일하게 쓰임
+						//-------------------------------------------------
+						$(".large").fadeOut("slow", function(){
+							$(".large").attr("src", imgName);
+						});
+						$(".large").fadeIn("slow");
+						*/
+						/*
+						//-------------------------------------------------
+						// (hide, show)크기가 작아지면서 사라지고 커지면서 나타남
+						//-------------------------------------------------
+						$(".large").hide("slow", function(){
+							$(".large").attr("src", imgName);
+						});
+						$(".large").show("slow");
+						*/
+						/*
+						//-------------------------------------------------
+						// (slideUp, slideDown)슬라이딩효과로 사라지고 슬라이딩효과로 나타남
+						//-------------------------------------------------
+						$(".large").slideUp("slow", function(){
+							$(".large").attr("src", imgName);
+						});
+						$(".large").slideDown("slow");
+						*/
+					},
+					function(){
+						$(this).parent().removeClass("hover");
+					}
+				);
+				
+			});
+		</script>
+	</head>
+	
+	<body>
+		<table border="1" cellspacing="0" class="shopping">
+			<tr>
+				<td width="130" align="center">
+					<a href="img/pic1.png" class="small"><img src="img/pic1.png"></a>
+					<p>pic1</p>
+				<td rowspan="4" width="350" align="center">
+					<img src="img/pic1.png" class="large">
+				<tr>
+					<td align="center">
+						<a href="img/pic2.png" class="small">
+						<img src="img/pic2.png"></a>
+						<p>pic2</p>
+				<tr>
+					<td align="center">
+						<a href="img/pic3.jpg" class="small"><img src="img/pic3.jpg"></a>
+						<p>pic3</p>
+				<tr>
+					<td align="center">
+						<a href="img/pic4.jpg" class="small"><img src="img/pic4.jpg"></a>
+						<p>pic4</p>
+		</table>
+	</body>
+</html>

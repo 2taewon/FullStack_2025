@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex19_object.html</title>
+</head>
+
+<script type = "text/javascript">
+	/*var person = {
+			name : "이순신",
+			phone : "010-9872-0202",
+			addr : "서울 서대문구 연희동",
+			
+			info: function(){
+				alert("name : " + this.name + "\n"
+					+ "phone : " + this.phone + "\n"
+					+ "addr : " + this.addr);
+			
+				var list = '';
+				for(var key in this) {
+					list += (key + " : " + this[key] + "\n")
+				} // end for
+				alert(list);
+			} 
+	};
+	
+	person.info();
+	console.log(person.info()); */
+	
+	function makePerson(name, phone, addr) {
+		var person = {
+				name : name,
+				phone : phone,
+				addr : addr,
+				
+				info : function(){
+					for(var key in this) {
+						list += (key + " : " + this[key] + "\n")
+					} // end for
+				}
+		}
+	}
+	
+	var p = makePerson("김연아", "0000", "서울시");
+	var p2 = makePerson("세종대왕", "4567", "경기");
+	
+	var person = [p, p2]; // 배열명 = [값1, 값2,...];
+	person[0].info();
+	person[1].info();
+	
+	var person = [];
+	person.push(makePerson)
+</script>
+
+<body>
+
+</body>
+</html>

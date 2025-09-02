@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex10_css</title>
+<style>
+	/*
+      E:가상선택자 <- 대화형컨텐츠
+      E::가상요소 <- E::before    E::after
+      E:nth-child(n)  <- E:nth-child(2) 
+      E:nth-child(2n)  <-E:nth-child(2n) 
+      E:nth-of-type(n)
+      E:not(s) <-  .fruits  div:not(.strawberry) 
+	*/
+	ul li::before{
+		content : "number"; /* 반드시 기재한다 */
+		font-weight : bold;
+		color : red;
+		margin-right : 20px;
+	}
+
+.fruits li:after {
+	content : "0";
+	font-weight : bold;
+	color : blue;
+	margin-left : 20px;
+}
+
+</style>
+
+<!-- <link href = "../Css/main.css" rel ="stylesheet"> -->
+
+
+</head>
+<body>
+<ul class = "fruits">
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+	<li>5</li>
+	<li>6</li>
+</ul>
+<hr>
+
+<ul>
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+	<li>5</li>
+	<li>6</li>
+</ul>
+<img alt ="trulli" src = "../images/1.jpg"	style = "width:50%">
+</body>
+</html>

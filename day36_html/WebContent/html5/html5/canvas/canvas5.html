@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Canvas Gradient</title>
+
+</head>
+<body>
+
+	<canvas id="myCanvas" width="600" height="600"
+		style="border: 1px solid #c3c3c3;"></canvas>
+
+	<script type="text/javascript">
+	window.onload = function(){
+	    var canvas = document.getElementById("myCanvas");
+	    var context = canvas.getContext("2d");
+	 
+	    var imageObj = new Image();
+	    imageObj.src = "wood-pattern.png";
+	    imageObj.onload = function(){
+	        var pattern = context.createPattern(imageObj, 	"repeat");
+	 
+	        context.rect(10, 10, canvas.width - 20,  canvas.height - 20);
+	 
+	        context.fillStyle = pattern;
+	        context.fill();
+	 
+	    };
+	   
+	};
+	
+	
+	</script>
+
+</body>
+</html>

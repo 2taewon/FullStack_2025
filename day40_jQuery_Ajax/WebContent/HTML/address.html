@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Kakao 지도 시작하기</title>
+	<style>
+	body {
+	text-align : center;
+	}
+	header, footer{
+		text-align : center;
+	}
+	#map {
+	width : 500px;
+	height : 500px;
+	margin : 0 auto;
+	}
+	</style>
+	<script  src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+	<header> 안녕하세요 </header>
+	<hr>
+	내 집 검색하기 : <input type = "text" id = "inputAddress">
+	<input type = "button" value = "검색" id = "search">
+	<div id="map"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d7cf1c39e707107e8b9100d15db21e94&libraries=services,clusterer,drawing"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+		
+		var map = new kakao.maps.Map(container, options);
+		
+		var geocoder = new kakao.maps.services.Geocoder();
+		$(function(){
+			$('#search').click(function() { 
+				var address = $('#inputAddress').val();
+			
+		
+		geocoder.addressSearch(address, function (result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+				map.setCenter(coords);
+				
+				var marker = new kakao.maps.Marker({
+					map: map,
+					position: coords
+				});
+			}
+			else {
+				alert("주소를 찾을 수 없습니다.");
+			}
+		});
+	});
+});
+	</script>
+<hr>
+<footer> 수고하세요 </footer>
+</body>
+</html>

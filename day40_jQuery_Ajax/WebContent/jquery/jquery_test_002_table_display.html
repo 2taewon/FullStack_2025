@@ -1,0 +1,89 @@
+<!-- 
+	=> <table>태그로 표현되는 행의 배경 색상을 jQuery를 사용하여 지배한다
+	=> jQuery의 addClass(~), removeClass(~), hover(~) 메소드 사용법을 숙지하자.
+-->
+<html>
+	<meta charset="UTF-8">
+		<style>
+			/*----------------------------------------------
+				class="style1"의 삽입된 태그에 배경색과 글자색상을 지정
+			----------------------------------------------*/
+			.style1{ background-color:#CFCFE7; color:#000000; }
+		</style>
+	<head>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+		//-----------------------------------------------
+		// $(document).ready( function(){자스코딩} );
+		//-----------------------------------------------
+			// body 태그 안의 요소들을 읽어들인 후 익명함수 내부의 자스코딩을 실행
+		$(document).ready( function(){
+			// id="staff"가 있는 태그 후손의 <thead>안의 후손의 tr 요소들에 지정한 css 적용
+			$("#staff thead tr").css("background", "#8A8AFF");
+			//$("#staff").find("thead").find("tr").css("background", "#8A8AFF");// 도 가능
+			//$("#staff tr:eq(0)").css("background", "#8A8AFF");// 도 가능
+			//$("#staff tr").eq(0).css("background", "#8A8AFF");// 도 가능
+		
+		//-----------------------------------------------
+		// id="staff"가 있는 태그 후손의 <tbody>안의 후손의 tr 중 인덱스 번호가 홀수인 놈에 배경색을 #AAAAAA로 바꿈.
+		//-----------------------------------------------
+			$("#staff tbody tr:odd").css("background", "#C9C9C9");
+
+		//-----------------------------------------------
+		// id="staff"가 있는 태그 후손의 <tbody>안의 후손의 tr 중 인덱스 번호가 짝수인 놈에 배경색을 #AAAAAA로 바꿈.
+		//-----------------------------------------------
+			$("#staff tbody tr:even").css("background", "#FF99CC");
+		//-----------------------------------------------
+		// id="staff"가 있는 태그 후손의 <tbody>태그 후손의 각 tr에 마우스 대면 설정한 배경색으로 바꾸고
+		// 떼면 원래로 돌아가도록 설정하기
+		//-----------------------------------------------
+			$("#staff tbody tr").hover( 
+				function( ){
+					// 마우스를 갖다댄 tr택그의 후손의 td태그에 class="style1" 삽입함.
+					// class="style" 삽입함으로써 <style> 태그에 설정한 css 가 적용됨.
+					// this 는 마우스를 갖다댄 tr태그를 가르키는 선택자이다.
+					$(this).find("td").addClass("style1");
+				},
+				function( ){
+					//마우스를 뺀 tr 태그 안에 td 태그에 class="style1"을 제거
+					$(this).find("td").removeClass("style1");
+				}
+			);
+			//-----------------------------------------------
+			// id="staff"가 있는 태그 후손의 <thead> 태그 후손의 각 th에 마우스를 대면 그밑의 <tbody>태그
+			//후손의 td의 배경색을 바꾸기
+			// 즉 마우스를 댄 th태그의 밑 즉 세로방향의 td의 배경색을 바꾸기				//-----------------------------------------------
+			$("#staff thead th").hover( 
+				function( ){
+				//마우스가 올라간 th태그의 순서번호 저장
+					var no=$(this).index( )+1;
+					// tbody 내부의 id 중에 각 td가 속한 부모 태그의 no번쨰 자식 td태그를 골라 class=style1를 삽입
+					$("#staff tbody td:nth-child("+no+")").addClass("style1");
+				},
+				function( ){
+					// 마우스를 때면 class="style1" 속성을 제거
+					$("#staff tbody td").removeClass("style1");
+				}
+			);
+
+		});
+
+		</script>
+	</head>
+	
+	<body><center>
+		<table id="staff" border=0 cellpadding=5>
+			<thead>
+				<tr><th>이름<th>혈액형<th>지역
+			</thead>
+			<tbody>
+				<tr><td>강민수<td>AB형<td>서울특별시 송파구
+				<tr><td>구지연<td>B형<td>미국 캘리포니아
+				<tr><td>김미화<td>AB형<td>미국 메사추세츠
+				<tr><td>김선화<td>O형<td>서울특별시 강서구
+				<tr><td>남기주<td>A형<td>서울특별시 노량진구
+				<tr><td>윤하린<td>B형<td>서울특별시 용산구
+			</tbody>
+		</table>
+	</body>
+</html>

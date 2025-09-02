@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script src="//code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(document).ready(function() {
+		$(":button").click(function() {
+			$.ajax({
+				url : "https://apis.daum.net/search/blog",
+				data : {
+					apikey:"9854529be7883dd186634663aad0a74c",
+					q:"강남",
+					result:10,
+					output:"json"
+				},
+				dataType : "jsonp",
+				success : function(jsonData) {
+					var itemList = jsonData.channel.item;
+					
+					for(var i = 0; i < itemList.length; i++) {
+						var item = itemList[i];
+						var link = item.link;
+						var title = item.title;
+						
+						$("#searchResult").append("<a href='" + link + "'>" + title + "</a>");
+						$("#searchResult").append("<br/>");
+					}
+					
+				}
+			})
+		})
+	});
+</script>
+</head>
+<body>
+	<h3>블로그 검색페이지</h3>
+<!-- 	키워드 입력 <input type="text" name="searchWord" size="20" /> --> 
+	<input type="button" value="강남검색" />
+	
+	<h5>검색결과</h5>
+	<div id="searchResult" style="height: 500px; width: 70%; border: 1px solid"></div>
+	
+	<footer>
+		<hr/>
+		청취 검색페이지
+	</footer>
+</body>
+</html>

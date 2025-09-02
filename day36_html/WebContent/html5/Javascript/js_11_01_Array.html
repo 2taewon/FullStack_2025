@@ -1,0 +1,132 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+
+		</script>
+	</head>
+	
+	<body>
+		<script>
+			//*********************************************************
+			// 다량의 국어 점수를 저장해서 관리하는 1차원 Array 객체 생성
+			//*********************************************************
+			var kor_arr = new Array();
+			//변수선언
+			//생성자함수를 메모리 함수로 올려서 객체화
+			//생성자 함수 호출하며 데이터전달
+			//객체 메모리 주소값을 저장
+			//즉 객체 참조 변수
+			document.write("<hr>Array객체의 배열 변수 총 개수 : "+kor_arr.length + "<br>");
+
+			//Array 객체의 push(~) 라는 메소드를 호출하여 1차원 Array객체에 데이터 추가
+			kor_arr.push(90);
+			kor_arr.push(80);
+			kor_arr.push(60);
+			kor_arr.push(50);
+
+			//Array 객체의 length(~) 라는 속성변수를 호출하여 배열변수의 개수를 출력하기
+			document.write("<hr>Array객체의 배열 변수 총 개수 : "+kor_arr.length + "<br>");
+
+			//Array객체가 소유한 배열변수의 데이터를 출력
+			document.write("<hr>Array객체의 [0] 배열 변수 : " + kor_arr[0]+"<br>");
+			document.write("<hr>Array객체의 [1] 배열 변수 : " + kor_arr[1]+"<br>");
+			document.write("<hr>Array객체의 [2] 배열 변수 : " + kor_arr[2]+"<br>");
+
+			//Array객체가 소유한 배열변수의 데이터를 출력
+			document.write("<hr>모든 국어 점수 출력 => ");
+			for (var i=0; i<kor_arr.length; i++){
+				document.write(kor_arr[i] + " ");
+			}
+			document.write("<br>");
+
+			//Array객체가 소유한 배열변수의 데이터의 총합 출력
+			document.write("<hr>모든 국어 점수 총합 출력 => ");
+			var tot=0;
+			for (var i=0; i<kor_arr.length; i++){
+				 tot = tot + kor_arr[i];
+			}
+			document.write(tot + "<br> ");
+
+			//Array객체의 메서드 join을 이용하여 모든 배열 변수의 데이터를 문자로 취급하여 붙여 리턴하여 출력
+			document.write("<hr>모든 국어 점수 총합 출력 (Array객체 메서드 join 이용 ) => ");
+			document.write( kor_arr.join(" , ") + "<br>");
+
+			//pop()메소드 이용해 배열변수를 오려내서 리턴
+			document.write("<hr>모든 국어 점수 총합 출력 (Array객체 메서드 pop 이용 ) => ");
+			while (kor_arr.length>0){
+				document.write( kor_arr.pop( )+" ");
+			}
+			document.write("<br>Array객체의 배열 변수 총 개수 : "+kor_arr.length + "<br>");
+
+			//영어 점수가 저장된 1차원 Array객체 생성
+			var engs = new Array(90,80,50);
+			document.write("<hr>모든 영어점수 출력 => "+engs.join(" , ") + "<br>");
+
+			//수학 점수가 저장된 1차원 Array객체 생성
+			var maths = [97,20,9, 11];
+			document.write("<hr>모든 수학점수 출력 => "+maths.join(" , ") + "<br>");
+
+			//수학점수를 [문자열]로 취급해 오름차순으로 정렬하기
+			maths.sort();
+			document.write("<hr>수학점수 [문자열]로 취급해 오름차순으로 출력 => "+maths.join(" , ") + "<br>");
+
+			//수학점수를 [숫자]로 취급해 오름차순으로 정렬하기
+			maths.sort( function(left,right){return left - right;});
+			document.write("<hr>수학점수 [숫자]로 취급해 오름차순으로 출력 => "+maths.join(" , ") + "<br>");
+
+			//수학점수를 [숫자]로 취급해 내림차순으로 정렬하기
+			maths.sort( function(left,right){return right - left;});
+			document.write("<hr>수학점수 [숫자]로 취급해 내림차순으로 출력 => "+maths.join(" , ") + "<br>");
+
+			//------------------------------------------------
+			// 옆에 앉은 친구 4명의 이름을 관리하는 Array 객체를 생성하고
+			// 친구이름을 오름차순으로 나열해서 출려가세여
+			//------------------------------------------------
+			var friend_names = ["승리", "준영", "지용", "용식"];
+			friend_names.sort();
+			document.write("<hr>친구이름 4명 오름차순으로 출력 => "+friend_names.join(" , ") + "<br>");
+
+			//------------------------------------------------
+			// 옆에 앉은 친구 4명의 이름을 관리하는 Array 객체를 생성하고
+			// 친구이름을 내림차순으로 나열해서 출려가세여
+			//------------------------------------------------
+
+			var friend_names = ["승리", "준영", "지용", "용식"];
+			friend_names.sort();
+			friend_names.reverse();
+			document.write("<hr>친구이름 4명 내림차순으로 출력 => "+friend_names.join(" , ") + "<br>");
+
+
+			document.write("<hr>친구이름 4명 내림차순으로 출력 => ");
+			var friend_names = ["승리", "준영", "지용", "용식"];
+			friend_names.sort();
+			while (friend_names.length>0){
+				document.write(friend_names.pop( )+" ");
+			}
+			document.write( "<br>");
+
+			//*********************************************
+			// 화학점수를 관리하는 Array 객체 생성하기
+			//*********************************************
+			var chemistrys = new Array(5);
+			//--------------------------------
+				//<주의>var 객참변수 = new Array(정수);
+				// 정수 숫자가 저장되는게 아니라 배열 변수 개수를 (정수)개 만큼 생성하란 의미
+				//변수만 만든 상태이므로 변수에는 undefined 저장
+			//---------------------------------
+			document.write("<hr>모든 화학 점수 개수 출력 => " +chemistrys.length + "<br>");
+			document.write("<hr>첫번째 화학 점수 출력 => " +chemistrys[0] + "<br>");
+			//미리 생성된 배열변수 안에 화학점수 저장하기
+			chemistrys[0] = 30;
+			chemistrys[1] = 40;
+			chemistrys[2] = 50;
+			chemistrys[3] = 60;
+			chemistrys[4] = 70;
+			document.write("<hr>모든 화학 점수 개수 출력 => " +chemistrys.length + "<br>");
+			document.write("<hr>첫번째 화학 점수 출력 => " +chemistrys[0] + "<br>");
+
+
+		</script>
+	</body>
+</html>

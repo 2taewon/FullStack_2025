@@ -1,0 +1,97 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+	</head>
+	
+	<body>
+		<center>[회원등록]
+		<form>
+			
+			<table border="1" cellpadding="5" cellspacing=0 bordercolor="#7A7A7A">
+			<tr>
+				<td colspan=2 bgcolor="#7A7A7A" style="color:white">◈ 기본정보</td>
+				<!-- <td></td> -->
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB"><font color="#EDE443">*</font>이름</td>
+				<td>
+					<input type="text" name="name" size="20" maxlength="20">
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB"><font color="#EDE443">*</font>아이디</td>
+				<td>
+					<input type="text" name="uid" size="20" maxlength="20"> [중복여부체크]
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB"><font color="#EDE443">*</font>암호</td>
+				<td>
+					<input type="password" name="pwd" size="20" maxlength="20"><font color="#EDE443"> *</font>암호확인 <input type="password" name="pwd" size="20" maxlength="20">
+				</td>
+			</tr>
+			<tr>
+				<td td colspan=2 bgcolor="#7A7A7A" style="color:white">◈ 개인정보</td>
+				<!-- <td></td> -->
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB">주민번호</td>
+				<td>
+					<input type="text" name="name" size="6" maxlength="6"> - <input type="text" name="name" size="7" maxlength="7">
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB">주소</td>
+				<td>
+					<input type="text" name="address" size="60" maxlength="20">
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB">최종학력</td>
+				<td>
+					<select name="school">
+							<option value=""></option>
+							<option value="중졸">불교</option>
+							<option value="고졸">기독교</option>
+							<option value="대졸">기독교</option>
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB">성별</td>
+				<td>
+					<input type="radio" name="sex" value="중졸">남
+					<input type="radio" name="sex" value="고졸">여
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB">관심분야</td>
+				<td>
+					<input type="checkbox" name="interest" value="JSP">정치
+					<input type="checkbox" name="interest" value="ASP">경제
+					<input type="checkbox" name="interest" value="P화P">사회
+					<input type="checkbox" name="interest" value="PHP">문화
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB">사진</td>
+				<td>
+					<input type="file" name="pic">
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#DBDBDB">자기소개</td>
+				<td>
+					<textarea name="soge" cols="60" rows="10" ></textarea>
+				</td>
+			</tr>
+			</table>
+
+			<input type="button" value="가입">
+
+			<!-- <input type="reset">을 포함하고 있는 폼태그 내의 입력양식을 초기화시킴 -->
+			<input type="reset" value="초기화">
+
+		</form>
+
+	</body>
+</html>

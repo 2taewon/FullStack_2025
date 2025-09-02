@@ -1,0 +1,50 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+	</head>
+	
+	<body>
+		<script>
+
+			var id_cnt=0;
+			var pwd_cnt=0;
+
+			do{
+				var id = prompt("아이디 입력요망","");
+					if (id == "abc"){
+						break;
+					}else{
+						alert("아이디 틀림");	
+						id_cnt++;
+						if (id_cnt>2){
+							break;
+						}
+					}
+			}while(true);
+			do{
+				if (id_cnt>2){
+					break;
+				}
+				var pwd = prompt("암호 입력요망","");
+					if (pwd == "123"){
+						break;
+					}else{
+						alert("암호 틀림");
+						pwd_cnt++;
+						if (pwd_cnt>2){
+							break;
+						}
+						
+					}
+			}while (true);
+
+			if (id_cnt>2||pwd_cnt>2)
+			{
+				document.write("실패");
+			}else{
+				document.write(id + "님! 어서오세요.");
+			}
+
+		</script>
+	</body>
+</html>

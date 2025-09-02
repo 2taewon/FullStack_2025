@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>	
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type = "text/javascript">
+	function countIncrease(){
+		/*alert("innerHTML : " + document.body.innerHTML + '\n\n\n'
+				+ "innerText : " +document.body.innerText);*/
+			let list ='';
+			list += "<ul>";
+			list += "<li>Hello</li>";
+			list += "<li>Hi</li>";
+			list += "<li>Good-BYE</li>";
+			list += "<li>안녕</li>";
+			list += "<ul>";
+			
+		//	document.body.innerHTML = list;
+		//	document.getElementById('div').innerHTML = list; // js method - getElementById('idName')
+		//	document.querySelector('#div').innerHTML = list; // css method - querySelector('#idName')
+			
+		//	var num = document.getElementsById('countSpan'); // document.querySelector('.countSpan')
+			let num = document.querySelector('span');
+		//	alert(num.innerHTML);
+			
+			num.innerHTML = parseInt(num.innerHTML) + 1;
+			
+	}
+	
+	// nameChange() 함수 만들어서 클릭 시 '강감찬' 이 본인 이름으로 변경되게 하기.
+	
+	function nameChange(){
+		let name = document.querySelector('.nameChange');
+		
+		name.innerHTML = 'tw';
+	}
+		
+</script>
+</head>
+<body>
+	
+	<span id = "countSpan" class = "countSpan">0</span> 번 클릭 &nbsp;&nbsp;
+	<input type = "button" value = "click" onclick = "countIncrease()"> <hr>
+	Good <br />
+	<h5>미리 축하합니다. 파이팅.</h5>
+	<span id = "nameChange" class = "nameChange">강감찬</span>
+	<input type = "button" value = "click" onclick = "nameChange()"> 
+	<div id = "div"></div>
+</body>
+</html>

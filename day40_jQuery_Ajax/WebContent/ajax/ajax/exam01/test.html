@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script>
+	var httpRequest = null;
+	
+	function requestMsg() {
+		//1단계 : XMLHttpRequest 객체 생성
+		if( window.XMLHttpRequest ) {  //chrome, firefox, safri,....
+			httpRequest = new XMLHttpRequest();
+		}else if( window.ActiveXObject ) {  //IE
+			httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+		}else {
+			httpRequest = null;
+		}
+	 
+	  //2단계 : 서버에서 응답해준 결과를 처리할 수 있는 callback함수를 설정
+		httpRequest.onreadystatechange = responseMsg;
+		
+		//3단계 : 초기화 작업(open())을 한후, XMLHttpRequest객체가 서버에게 요청(send() )
+		/* httpRequest.open('GET', 'hello.html', true); */
+		httpRequest.open('GET', 'hello.html', true);
+		httpRequest.send(null);
+		
+		function responseMsg() {
+			//4단계 : 서버에서 응답한 결과를 처리
+			// 서버에서 응답을 완료했고, 올바른 응답 결과가 날아온 경우
+			if( httpRequest.readyState == 4 ) {
+				if( httpRequest.status == 200 ) {
+					
+					//5단계 : 서버에서 날아온 응답 결과를 client 브라우저에 적용
+					var msgView = document.getElementById("msgView");
+					msgView.innerHTML = httpRequest.responseText;
+				}
+			}
+		}
+	
+	}
+</script>
+</head>
+<body>
+	<h1>서버에서 받은 메세지</h1>
+	<div id="msgView" style="height: 100px; width: 500px; border: 1px solid black"></div>
+	<input type="button" value="서버에서 자료 요청" onclick="requestMsg()" />
+</body>
+</html>

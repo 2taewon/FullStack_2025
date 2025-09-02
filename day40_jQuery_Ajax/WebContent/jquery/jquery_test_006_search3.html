@@ -1,0 +1,169 @@
+<!-- 
+	[검색 키워드]를 입력하고 [검색] 버튼 클릭하면 [검색 결과]만 화면에 보여준다
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<style>.style1{ background-color:#00f; color:#fff; }</style>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready( function(){ 
+				//-------------------------------------
+				// class=sungjuk 가진 태그 후손의 tbody 태그 후손의tr 태그를 관리하는
+				// JQuery 객체의 메위주를 trObj 에 저장하기
+				//-------------------------------------
+				var trObj = $(".sungjuk tbody tr");
+				//-------------------------------------
+				// class=search 가진 태그에 click 이벤트가 일어나면
+				// 키워드를 가지고 검색한 후 검색된 행만 보여주는 코딩 설정하기
+				//-------------------------------------
+				$(".search").click( function( ){
+					//-------------------------------------
+					// 입력된 키워드 값을 얻어내어 변수에 저장
+					//-------------------------------------
+					var keyword1 = $(".keyword1").val();
+					var keyword2 = $(".keyword2").val();
+					var orAnd = $(".orAnd").val();
+					// 위 코드는 아래로도 가능
+					// var keyword1 = $("[name='keyword1']").val();
+					//-------------------------------------
+					// 입력된 키워드 값이 공백 또는 비어있으면 경고하고 검색 중지
+					//-------------------------------------
+					if ( keyword1.split(" ").join("")=="" 
+						&& keyword2.split(" ").join("")==""
+						&& $("[name='hakjum']:checked").length == 0){ //***셤 문제**** 메소드 리턴값
+						alert("검색 데이터가 없습니다");
+						return;
+					}
+					//-------------------------------------
+					// keyword1 변수에 저장된 데이터의 앞뒤 공백을 제거
+					//-------------------------------------
+					keyword1 = $.trim(keyword1);
+					keyword2 = $.trim(keyword2);
+					//-------------------------------------
+					// 입력된 키워드 값을 대문자로 바꿈, 영어는 대소문자를 통일한 후 비교해야함.
+					//-------------------------------------
+					keyword1 = keyword1.toUpperCase();
+					keyword2 = keyword2.toUpperCase();
+					//-------------------------------------
+					// table 태그 후손 중 tbody 후손 중 모든 tr을 감추기
+					//-------------------------------------
+					trObj.hide();
+					// 위 코딩은 아래처럼도 가능
+					// $(".sungjuk").find("tbody").find("tr").hide();
+					//----------------------------------------------------------
+					// class=sungjuk 가진 태그 후손의 tbody 태그 후손의 tr에 차례대로 접근해서
+					// tr 내부에 데이터를 검색하는 익명함수를 실행한다.
+					trObj.each( function( ){
+					//hakjum =hakjum.indexOf(hakjum);
+					//----------------------------------------------------------
+						var tmpObj = $(this).children();
+						// n 번째 tr의 자식 중 1번째 자식 중 첫번째 td가 안고 있는 문자열을 
+						//구한후 대문자로 바꾸어 변수 tdData1에 저장하기
+						var tdData1 = tmpObj.eq(0).text().toUpperCase();
+						// n 번째 tr의 자식 중 2번째 자식 중 첫번째 td가 안고 있는 문자열을 
+						//구한후 대문자로 바꾸어 변수 tdData2에 저장하기
+						var tdData2 = tmpObj.eq(1).text().toUpperCase();
+						// n 번째 tr의 자식 중 3번째 자식 중 첫번째 td가 안고 있는 문자열을 
+						//구한후 대문자로 바꾸어 변수 tdData3에 저장하기
+						var tdData3 = tmpObj.eq(2).text().toUpperCase();
+						// keyword1에 저장된 데이터가 tdData 또는 tdData1 또는 tdData2 또는
+						// tdData3에 있으면 n번째 tr을 보여라
+						
+						var tdDataObj1 =  (tdData1.indexOf(keyword1)>=0 
+								|| tdData2.indexOf(keyword1)>=0
+								|| tdData3.indexOf(keyword1)>=0);
+
+						var tdDataObj2 =  (tdData1.indexOf(keyword2)>=0 
+								|| tdData2.indexOf(keyword2)>=0
+								|| tdData3.indexOf(keyword2)>=0);
+
+
+				
+					//----------------------------------------------------------
+
+						if ( !(keyword1.split(" ").join("")=="") && !(keyword2.split(" ").join("")=="") ){
+							if ( orAnd == "or"){
+								if ( tdDataObj1 || tdDataObj2 ){
+									$(this).show();
+								}
+							}
+							else{
+								if ( tdDataObj1 && tdDataObj2 ){
+									$(this).show();
+								}
+							}
+						}
+						if ( !(keyword1.split(" ").join("")=="") || !(keyword2.split(" ").join("")=="") ){
+							if ( tdDataObj1 && tdDataObj2 ){
+								$(this).show();
+							}
+						}
+						if ( (keyword1.split(" ").join("")=="") && (keyword2.split(" ").join("")=="") ){
+								if (tdDataObj3){
+									$(this).show();
+								}
+						}
+
+						
+					});
+
+				});
+				//-------------------------------------
+				// class=allsearch 가진 태그에 click 이벤트가 일어나면
+				// 모든 행을 보여주는 코딩 설정하기
+				//-------------------------------------
+				$(".allsearch").click( function( ){
+					//모든 tr 을 보여라.
+					$(".sungjuk tbody tr").show();
+					//키워드에 입력한 문자열을 지워라
+					$(".keyword1").val("");
+					$(".keyword2").val("");
+				});
+
+			});
+		</script>
+	</head>
+
+	<body><center>
+		<input type="checkbox" name="hakjum" value="A">A학점
+		<input type="checkbox" name="hakjum" value="B" >B학점
+		<input type="checkbox" name="hakjum" value="C">C학점
+		<input type="checkbox" name="hakjum" value="D" >D학점
+		<input type="checkbox" name="hakjum" value="F" >F학점<br><br>
+		<!-- --------------------------------------------------------- -->
+		키워드 : <input type="text" name="keyword1" class="keyword1">
+		<select name="orAnd" class="orAnd">
+			<option value="or">or</option>
+			<option value="and">and</option>
+		</select>
+		<input type="text" name="keyword2" class="keyword2"><br><br>
+		<!-- --------------------------------------------------------- -->
+		<input type="button" value="검색" class="search">
+		<input type="button" value="모두 검색" class="allSearch"><br><br>
+		<!-- --------------------------------------------------------- -->
+		<table border="1" cellpadding="5" class="sungjuk">
+			<thead>
+				<tr><th>번호<th>이름<th>평균
+			</thead>
+			<tbody>
+				<tr><td>101<td>Johnx<td>87
+				<tr><td>102<td>Naman<td>90
+				<tr><td>103<td>Chirag<td>85
+				<tr><td>104<td>David<td>92
+				<tr><td>105<td>Kelly<td>81
+				<tr><td>106<td>Charles<td>77
+				<tr><td>107<td>Jerry<td>91
+				<tr><td>108<td>Beth<td>87
+				<tr><td>109<td>Caroline<td>82
+				<tr><td>110<td>Hanen<td>71
+				<tr><td>111<td>Douglas<td>57
+				<tr><td>112<td>Tim<td>86
+				<tr><td>113<td>Michael<td>68
+				<tr><td>114<td>Kimbley<td>88
+				<tr><td>115<td>Christinax<td>72
+				<tr><td>116<td>권<td>72
+			</tbody>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,106 @@
+<!-- 
+	2차원 Array객체 사용법을 숙지하기
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+		</script>
+	</head>
+	
+	<body>
+		<script>
+			// 1차원 Array객체 3개 생성하여 변수에 저장하기
+			var kors = new Array( 91,92,93 );
+			var engs = new Array( 81,82,83 );
+			var mats = new Array( 71,72,73 );
+			//1차원 Array객체 3개를 저장할 또 다른 1차원 Array객체 생성하기
+			var scores = new Array();
+			//1차원 Array객체에  또 다른 1차원 Array객체를 저장하기
+			scores.push(kors);
+			scores.push(engs);
+			scores.push(mats);
+			
+			//--------------------------------
+			//위 코딩은 아래처럼도 가능
+			//--------------------------------
+			/*
+			var scores = new Array();
+			scores.push(new Array( 91,92,93 ) );
+			scores.push(new Array( 81,82,83 ) );
+			scores.push(new Array( 71,72,73 ) );
+			*/
+			//--------------------------------
+			/*
+			var scores = [
+				[91,92,93,94]
+				,[81,82,83]
+				,[71,72,73]
+			]
+			*/
+			
+			//--------------------------------
+			//scores에 저장된 Array 객체에 저장된 또 다른 Array 객체 3개가 소유한 데이터를 원시적으로 출력하기
+			//------------------------------------
+			document.write( "scores에 저장된 Array 객체에 저장된 또 다른 Array 객체 3개가 소유한 데이터를 원시적으로 출력하기<br><br>" );
+			document.write( "국어점수 : " + scores[0][0] + " " + scores[0][1] + " " + scores[0][2] + " ");
+			document.write( "<br>영어점수 : " + scores[1][0] + " " + scores[1][1] + " " + scores[1][2] + " ");
+			document.write( "<br>수학점수 : " + scores[2][0] + " " + scores[2][1] + " " + scores[2][2] + "<hr>");
+			//-------------------------------------
+			//scores에 저장된 Array객체에 저장된 또 다른 Array 객체 3개가 소유한 데이터를 더블 반복문을 사용하여 출력하기
+			//--------------------------------------
+			document.write( "scores에 저장된 Array객체에 저장된 또 다른 Array 객체 3개가 소유한 데이터를 더블 반복문을 사용하여 출력하기<br><br>" );
+			for ( i=0; i<scores.length; i++ ){
+				for ( j=0; j<scores[i].length; j++ ){
+						
+					document.write( scores[i][j] + " " );
+				}
+				document.write( "<br>" );
+			}
+			document.write("<hr>");
+			//------------------------------------------
+			// <문>국어점수 2개 99,77점을 추가하려면 ?
+			//-----------------------------------------
+			document.write( "국어점수 2개 99, 77점을 추가<br><br>" );
+			scores[0].push(99);
+			scores[0].push(77);
+			for ( i=0; i<scores.length; i++ ){
+				for ( j=0; j<scores[i].length; j++ ){
+						
+					document.write( scores[i][j] + " " );
+				}
+				document.write( "<br>" );
+			}
+			document.write("<hr>");
+			//-----------------------------------------
+			// <문>국어, 영어, 수학 점수들을 내림차순으로 정렬하려면?
+			//-------------------------------------------
+			document.write( "국어, 영어, 수학 점수들을 내림차순으로 정렬<br><br>" );
+			for ( i=0; i<scores.length; i++ ){
+				for ( j=0; j<scores[i].length; j++ ){
+					scores[i].sort();
+					scores[i].reverse();
+					document.write( scores[i][j] + " " );
+				}
+				document.write( "<br>" );
+			}
+			document.write("<hr>");
+			//-----------------------------------------
+			// <문>국어, 영어, 수학 점수들을 내림차순으로 다른 방법으로 정렬하려면?
+			//-------------------------------------------
+			for (i=0; i<scores.length; i++){
+			scores[i].sort(function(left,right){return right - left;});
+			}
+			for ( i=0; i<scores.length; i++ ){
+				for ( j=0; j<scores[i].length; j++ ){
+					document.write( scores[i][j] + " " );
+				}
+				document.write( "<br>" );
+			}
+			document.write("<hr>");
+
+
+			
+		</script>
+	</body>
+</html>

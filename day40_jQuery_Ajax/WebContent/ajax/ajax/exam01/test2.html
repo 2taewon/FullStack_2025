@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script>
+	var httpRequest = null;
+
+	function getXMLHttpRequest() {
+		if (window.XMLHttpRequest) { 
+			return new XMLHttpRequest();
+		} else if (window.ActiveXObject) { 
+			return new ActiveXObject("Microsoft.XMLHTTP");
+		} else {
+			return null;
+		}
+	}
+
+	function sendRequest(method, url, params, callback) {
+		httpRequest.onreadystatechange = callback;
+		httpRequest.open(method, url, true);
+		httpRequest.send(params);
+	}
+
+	function requestMsg() {
+		httpRequest = getXMLHttpRequest();
+		sendRequest("GET", "hello.html", null, responseMsg);
+	}
+
+	function responseMsg() {
+		if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+		
+				var msgView = document.getElementById("msgView");
+				msgView.innerHTML += httpRequest.responseText;
+			
+		}
+	}
+</script>
+</head>
+<body>
+	<h1>서버에서 받은 메세지</h1>
+	<div id="msgView"
+		style="height: 100px; width: 500px; border: 1px solid black"></div>
+	<input type="button" value="서버에서 자료 요청" onclick="requestMsg()" />
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+		</script>
+	</head>
+	
+	<body>
+		<script>
+		//----------------------------------------
+		// 게시판의 데이터를 JSON 으로 표현
+		//----------------------------------------
+		var board = {
+			"title" : "강의 자료",
+			"description" : "협회[DoYeon]에서 진행중인 강의 자료 입니다.",
+			"total" : 4,
+			"item" : [
+				{"no" : "공지", "subject" : "Javascript 강의자료", "hit" : 3, "date" : "2013.10.29"},
+				{"no" : 3, "subject" : "JQuery 강의자료", "hit" : 6, "date" : "2013.11.08"},
+				{"no" : 2, "subject" : "AJAX 강의자료", "hit" : 15, "date" : "2013.11.07"},
+				{"no" : 1, "subject" : "Oracle 강의자료", "hit" :19, "date" : "2013.11.05"}
+			]
+		};
+		//----------------------------------------
+		// JSON으로 표현된 게시판의 데이터를 출력
+		//----------------------------------------
+		document.write( "게시판의 종류 => " + board.title + "<br>");
+		document.write( "게시판의 설명 => " + board.description + "<br>");
+		document.write( "게시판 총 글개수 => " + board.total + "<br>");
+		document.write( "<table cellpadding=3 border=1>" );
+		document.write( "<tr>" );
+		document.write( "<td>글번호" );
+		document.write( "<td>글제목" );
+		document.write( "<td>조회수" );
+		document.write( "<td>작성일" );
+		document.write( "</tr>" );
+		for ( var i=0; i<board.item.length; i++ ){
+			document.write( "<tr>" );
+			document.write( "<td>"+board.item[i].no );
+			document.write( "<td>"+board.item[i].subject );
+			document.write( "<td>"+board.item[i].hit );
+			document.write( "<td>"+board.item[i].date );
+		}
+		document.write( "</table>" );
+		</script>
+	</body>
+</html>

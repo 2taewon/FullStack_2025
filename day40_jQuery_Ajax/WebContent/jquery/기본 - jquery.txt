@@ -1,0 +1,17 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script src="jquery-1.11.0.min.js"></script>
+		
+		<script>
+			
+			$(document).ready(function(){
+				
+			});
+		</script>
+	</head>
+	
+	<body>
+		
+	</body>
+</html>

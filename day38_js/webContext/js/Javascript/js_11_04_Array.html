@@ -1,0 +1,50 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+			function getWeek(num){
+				var yoil = ["일","월","화","수","목","금","토"];
+				return yoil[num];
+			}
+			function getZero(number){
+				if(number<10){ number = "0" + number;}
+				return number;
+			}
+			
+			function getNowtime(){
+				var today = new Date();
+				//--------------------------------
+				var year = today.getFullYear();
+				var month = getZero((today.getMonth()+1));
+				var date = getZero(today.getDate());
+				var week = getWeek( today.getDay() );
+				var hour = today.getHours();	
+				var minute = getZero(today.getMinutes());
+				var second = getZero(today.getSeconds());
+				//--------------------------------
+				if (hour==12){
+					hour = "오후 " + hour;
+				}
+				if (hour>12){
+					hour = hour - 12;
+					if(hour<10){
+						hour = "오후 " + "0"+hour;
+					}
+				}else if(hour<12){
+					if(hour<10){
+						hour = "오전 " + "0"+hour;
+					}
+				}
+				return year + "년 " +month + "월 " +date + "일 " + " (" + week + ") " + hour + "시 " + minute + "분 " +second + "초" ;
+			}
+			
+		</script>
+	</head>
+	
+	<body>
+		<script>
+		
+			document.write(getNowtime());//2019년 03일 13일 (수) 오후 04시 49분 50초
+		</script>
+	</body>
+</html>

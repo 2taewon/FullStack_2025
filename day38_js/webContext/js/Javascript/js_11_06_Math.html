@@ -1,0 +1,129 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+		</script>
+	</head>
+
+	<body>
+		<script>
+		var w1 = 85.4;
+		var w2 = 81.5;
+		var w3 = 74.8;
+		//--------------------------------------------
+		// Math 객제의 max(~) 메소드 호출로 최대값 리턴
+		//--------------------------------------------
+		document.write(Math.max(w1,w2,w3)+"<br>");
+		//--------------------------------------------
+		// Math 객제의 min(~) 메소드 호출로 최대값 리턴
+		//--------------------------------------------
+		document.write(Math.min(w1,w2,w3)+"<br>");
+		//--------------------------------------------
+		// 소수 첫째자리 무조건 올림
+		//--------------------------------------------
+		document.write(Math.ceil(w1)+"<br>");
+		document.write(Math.ceil(w2)+"<br>");
+		document.write(Math.ceil(w3)+"<br>");
+		document.write(Math.ceil(-7.1)+"<hr>");
+		//--------------------------------------------
+		// 소수 첫째자리 무조건 내림
+		//--------------------------------------------
+		document.write(Math.floor(w1)+"<br>");
+		document.write(Math.floor(w2)+"<br>");
+		document.write(Math.floor(w3)+"<br>");
+		document.write(Math.floor(-7.1)+"<hr>");
+		//--------------------------------------------
+		// 소수 첫째자리 반올림
+		//--------------------------------------------
+		document.write(Math.round(w1)+"<br>");
+		document.write(Math.round(w2)+"<br>");
+		document.write(Math.round(w3)+"<hr>");
+		//--------------------------------------------
+		// 절대값 리턴
+		//--------------------------------------------
+		document.write(Math.abs(-7)+"<hr>");
+		//--------------------------------------------
+		// 0-1미만의 무작위 실수 리턴
+		//--------------------------------------------
+		document.write(Math.random()+"<hr>");
+		//--------------------------------------------
+		// 1-5까지의 무작위 정수 리턴
+		//--------------------------------------------
+		document.write(Math.floor(Math.random()*5+1)+"<hr>");
+		//--------------------------------------------
+		// 배열변수 안의 데이터를 랜덤하게 바꾸기
+		//--------------------------------------------
+		var months = ["01월","02월","03월","04월","05월","06월","07월","08월","09월","10월","11월","12월"];
+		/*for (var i=0; i<5; i++){
+			var idx1 = Math.floor(Math.random()*10);
+			var idx2 = Math.floor(Math.random()*10);
+			months[Math.floor(Math.random()*10)] = Math.floor(Math.random()*10);
+		}*/
+		for (var i=0; i<5; i++){
+			var idx1 = Math.floor(Math.random()*12);
+			var idx2 = Math.floor(Math.random()*12);
+			var tmp = months[idx1];
+			months[idx1] = months[idx2];
+			months[idx2] = tmp;
+		}
+		document.write(months.join(" , ")+"<hr>");
+		//--------------------------------------------
+		// 로또번호 5000원어치 출력
+		//--------------------------------------------
+		var lotto = new Array();
+		var nodouble = 0;
+		var tmp=0;
+		for (var k=0; k<5; k++){
+			for (var i=0; i<6;){
+				var idx = Math.floor(Math.random()*45+1);
+				tmp=idx;
+				nodouble = 0;
+				for (var j=0; j<6; j++){
+					var check = parseInt(lotto[j]);
+					if (check==tmp){
+						nodouble++;
+					}
+				}
+				if (nodouble==0){
+					lotto[i]=tmp;
+					i++;
+				}
+			}
+			lotto.sort(function(left,right){return left-right;});
+			document.write(nodouble+"||"+lotto.join(" , ")+"<br>");
+		}
+		document.write("<hr>");
+
+		//------------------------------------------
+		// 5천원 어치 로또 번호 출력하기
+		//------------------------------------------
+		for (var i=0; i<5; i++ ){
+		// 로또 번호를 6개를 저장하기 위한 Array 객체 생성하기  0
+			var lotto_nos = [];
+			for ( var j=0; j<6; j++ ){
+				var no =  Math.floor(Math.random()*45+1 );
+				//---------------------------------------------
+				var cnt = 0;
+				for ( k=0; k< lotto_nos.length; k++ ){
+					if( lotto_nos[k]==no ){ cnt++; }
+				}
+				if (cnt>0){ j--; continue; }
+				/*---------------------------------------
+						참조
+				-----------------------------------------
+				var str = " , " + lotto_nos.join(" , ") + " , ";
+				if (str.indexOf(" , " + no + " , ")>=0){
+					j--; continue;
+				}
+				----------------------------------------*/
+				lotto_nos.push( no );
+			}
+
+			lotto_nos.sort(
+				function( left, right ){ return left - right; }
+			);
+			document.write( lotto_nos.join(" , ") + "<br>");
+		}
+		</script>
+	</body>
+</html>

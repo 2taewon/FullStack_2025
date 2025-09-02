@@ -1,0 +1,131 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+	</head>
+	
+	<body>
+		<script>
+
+			//평균이 60이상이고 국어가 40이상이고 영어가 40이상이면 합격 출력
+			//이외 경우 불합격 출력
+
+			var kor = 30;
+
+			var eng = 100;
+
+			var avg = (kor+eng)/2;
+				
+
+			if(avg >=60 && kor>=40 && eng>=40 ){
+				document.write("합격");
+			}else{
+				document.write("평균 미달 불합격<br>");
+
+				if(kor<40 && eng>=40){
+					document.write(" 국어 낙제 불합격");
+					
+				}else if(eng<40 && kor>=40){
+					document.write(" 영어 낙제 불합격");
+					
+				}else if(kor<40 && eng<40){
+					document.write(" 국어, 영어 둘다 낙제");
+				}
+					
+			}
+
+
+/*
+
+			if(avg <60 || kor<40 || eng<40 ){
+				if(avg<60){
+				document.write("평균 미달 불합격<br>");
+				}
+				if(kor<40 && eng>=40){
+					document.write(" 국어 낙제 불합격");
+					
+				}else if(eng<40 && kor>=40){
+					document.write(" 영어 낙제 불합격");
+				}else if(kor<40 && eng<40){
+					document.write(" 국어, 영어 둘다 낙제");
+				}
+			}else{
+				document.write("합격");
+			}
+*/
+
+/*
+			if(!(avg <60 || kor<40 || eng<40 )){
+				document.write("합격");
+			}else{
+
+				if(avg<60){
+				document.write("평균 미달 불합격<br>");
+				}
+				if(kor<40 && eng>=40){
+					document.write(" 국어 낙제 불합격");
+					
+				}else if(eng<40 && kor>=40){
+					document.write(" 영어 낙제 불합격");
+				}else if(kor<40 && eng<40){
+					document.write(" 국어, 영어 둘다 낙제");
+				}
+			}
+
+*/
+
+/*
+			if(avg>=60){
+				if(kor>=40 && eng>=40){
+					document.write("합격");
+				}else{
+					if(kor<40 && eng>=40){
+					document.write(" 국어 낙제 불합격");
+					
+					}else if(eng<40 && kor>=40){
+					document.write(" 영어 낙제 불합격");
+					}
+				}
+			}else{
+					if(avg<60){
+				document.write("평균 미달 불합격<br>");
+				}
+				if(kor<40 && eng>=40){
+					document.write(" 국어 낙제 불합격");
+					
+				}else if(eng<40 && kor>=40){
+					document.write(" 영어 낙제 불합격");
+				}else if(kor<40 && eng<40){
+					document.write(" 국어, 영어 둘다 낙제");
+				}
+
+			}
+			
+*/
+
+
+
+
+/*
+			if(!(avg>=60 && kor>=40 && eng>=40)){
+				if(avg<60){
+				document.write("평균 미달 불합격<br>");
+				}
+				if(kor<40 && eng>=40){
+					document.write(" 국어 낙제 불합격");
+					
+				}else if(eng<40 && kor>=40){
+					document.write(" 영어 낙제 불합격");
+				}else if(kor<40 && eng<40){
+					document.write(" 국어, 영어 둘다 낙제");
+				}
+			}else{
+				if(kor>=40 && kor>=40){
+				document.write("합격");
+				}
+			}
+
+*/
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="httprequest.js"></script>
+<script>
+	function clearOnClick() {
+		var debug = document.getElementById("debug");
+		debug.value = "";
+	}
+	
+	function debugTrace(msg) {
+		var debug = document.getElementById("debug");
+		debug.value += msg;
+	}
+	
+	function sendOnClick() {
+		sendRequest("Post", 'sample.jsp', null, callback);
+	}
+	
+	function callback() {
+		var msg = '';
+		if(httpRequest.readyState == 4) {
+			if(httpRequest.status == 200) {
+				//var memberList = JSON.parse(httpRequest.responseText);
+				var memberList = eval(httpRequest.responseText);
+				msg += '회원수 : ' + memberList.length + "명\n";
+				for(var i = 0; i < memberList.length; i++) {
+					var mem = memberList[i]	;
+					var id = mem.id;
+					var name = mem.name;
+					msg += id + '(' + name + ')\n';
+				}
+			}
+		}
+		debugTrace(msg);
+	}
+</script>
+</head>
+<body>
+	<form name="form1">
+		<textarea rows="15" cols="80" id="debug" name="debug"></textarea><br/>
+		
+		<input type="button" value="서버에 자료요청" onclick="sendOnClick()" />
+		<input type="button" value="초기화" onclick="clearOnClick()" />
+	</form>
+</body>
+</html>

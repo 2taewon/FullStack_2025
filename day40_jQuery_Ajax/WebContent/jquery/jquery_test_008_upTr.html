@@ -1,0 +1,70 @@
+<!-- 
+	=> tr 태그의 순서를 2초마다 바꾸어 본다
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				//-----------------------------------
+				// 3초마다 함수upTr("xxx")를 반복적으로 호출
+				//-----------------------------------
+				setInterval("upTr('xxx')", 1000);
+					// 위 코드는 이래 처럼도 가능
+					// setInterval("upTr('xxx')", 3000);
+			});
+			function upTr(idV){
+				//-----------------------------------
+				// id = idV매개변수저장값 가진 테이블 태그를 관리하는
+				//Jquery 객체의 메, 위, 주를 변수에 저장
+				//-----------------------------------
+				var tableObj = $("#"+idV);
+				//-----------------------------------
+				// 첫번쨰 tr을 관리하는 JQuery 객체의 메, 위, 주를 변수에 저장
+				//-----------------------------------
+				var firstTrObj = tableObj.find("tr").first();
+				// 위코드는 아래 처럼도 가능
+				// var firstTrObj = tableObj.find("tr").eq(0);
+				//-----------------------------------
+				// 마지막 tr을 관리하는 JQuery 객체의 메, 위, 주를 변수에 저장
+				//-----------------------------------
+				var lastTrObj = tableObj.find("tr").last();
+				//-----------------------------------
+				// 첫번째 tr을 복사해서 마지막 tr 다음에 삽입하자
+				//-----------------------------------
+				tableObj.append(firstTrObj.clone());
+				//-----------------------------------
+				// 첫번쨰 tr을 삭제하자
+				//-----------------------------------
+				firstTrObj.remove();
+
+
+			}
+		</script>
+	</head>
+	
+	<body><center>
+		<table border=0 cellspacing=0 cellpadding=0 id="xxx" align=center> 
+			<tr bgcolor="#FFF00">
+				<td>보노보노
+			<tr bgcolor="#FFCC00">
+				<td>도라에몽
+			<tr bgcolor="#FF9900">
+				<td>짱구
+			<tr bgcolor="#FF6600">
+				<td>피카츄
+		</table>
+		<br>
+
+		<select name="birth_month">
+			<option value = "">
+			<option value = "01">01
+			<option value = "02">02
+			<option value = "03">03
+			<option value = "04">04
+			<option value = "05">05
+			<option value = "06">06
+		</select>
+	</body>
+</html>

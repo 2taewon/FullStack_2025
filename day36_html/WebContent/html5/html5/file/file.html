@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>File API 예제</title> 
+	<meta charset="utf-8"> 
+	
+	<script type="text/javascript"> 
+		
+		function readFile(){
+			var file = document.getElementById("file").files[0];
+			document.getElementById("fileName").textContent = file.name;
+			document.getElementById("fileSize").textContent = "("+file.size+" byte)";
+			var reader = new FileReader();
+			reader.onload = function(){
+				var display = document.getElementById("content");
+				display.textContent = reader.result;
+			};
+			var encodingList = document.getElementById("encoding");
+			var encoding = encodingList.options[encodingList.selectedIndex].value;
+			reader.readAsText(file,encoding);
+		}
+		
+	</script> 
+	
+	
+</head> 
+ 
+<body onload="startWatchPosition()"> 
+<h1>File API 예제</h1>
+<input type="file" id="file">
+<select id="encoding">
+	<option>utf-8</option>
+	<option>euc-kr</option>
+</select>
+<button onclick="readFile()">읽기</button><br>
+<div>
+	<span id="fileName">파일이름</span><span id="fileSize">(크기)</span>
+</div>
+<textarea id="content" readonly style="width:300px; height:400px;"></textarea>
+</body>
+</html>

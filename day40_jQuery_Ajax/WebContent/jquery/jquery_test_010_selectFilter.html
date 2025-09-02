@@ -1,0 +1,103 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				//span에 감싸진 select에 첫번째 skill리스트를 복사해서 저장해 둠
+				var skillList = $('#skills').find('select').eq(0).find('option').clone(); 
+				//select 태그를 관리하는 객체 생성.
+				var skillManage = $('#skills').find('select');
+				skillManage.change(function(){
+					var obj = $(this);
+					//select의 이전 select 태그의 내용이 비었을 경우 이전 select를 선택하게 함.
+					if(obj.index() != 0 && obj.prev().val() == '') {
+						alert('이전 스킬을 먼저 선택하세요');
+						obj.val('');
+						return;
+					}
+					if(obj.is(skillManage) ) {
+						var tmp = obj.siblings(); //change가 일어난 select 객체 말고 다른 select 형제들을 관리하기 위한 변수.
+						var alertFlag = false; //중복 메세지 출력을 위해서 쓰는 flag 변수
+						for(var i=0; i<tmp.length; i++) {
+							if(tmp.eq(i).val() == ''|| tmp.eq(i).val() == obj.val()) { //다른 select의 값이 비었거나 중복되었다면, option 리스트를 다시 만들어줄것임.
+								if((tmp.eq(i).val() == obj.val())) { //change가 일어난 select와 다른 select에 값이 같다면
+									alertFlag = true;	//중복체크를 위한 변수를 true로 하고,
+									//obj.val(''); //중복된 select 객체의 값들을 비움.
+									tmp.eq(i).val(''); //중복된 select 객체의 값들을 비움.
+								}
+								//select가 변경되었을 경우 skillList에 복사된 내용에서 다른 select에 선택된 value를 지우고 보여줌
+								tmp.eq(i).find('option').remove(); //형제 select의 옵션을 모두 지움
+								skillList.clone().appendTo(tmp.eq(i)); //skillList에 복사된 스킬을 복사하여 select안 option으로 집어넣음
+								for(var k=0; k<skillManage.length; k++) { //이제 skillManage가 관리하는 select길이만큼 돌아서 option리스트에 중복된 값을 지워줄것임.
+									for(var j=1; j<tmp.eq(i).find('option').length; j++) { //option의 0번 index는 ''이기 때문에 1번부터 시작임.
+										if(skillManage.eq(k).val() == tmp.eq(i).find('option').eq(j).val()) { //select에 선택된 값과 옵션안의 값이 같으면
+											tmp.eq(i).find('option').eq(j).remove(); //지움.
+										}
+									}
+								}
+							} //if(skillManage.eq(i).val() == '')
+						}	//for(var i=$(this).index()+1; i<skillManage.length; i++)
+						if(alertFlag == true) {
+							alert('중복된 선택은 불가합니다.'); //중복검사 변수에 true이변 중복 경고창 띄워줌
+						}
+					}
+				});
+				$('#reset').click(function(){ //초기화 버튼임. 그냥 값만 비워줌 왜나하면 첫번째 select가 선택되지 않으면 
+					var skill=$('#skills').find('select');//두번째 select는 선택할수 없도록 위에서 막았기 때문에
+					for(var i=0; i<skill.length; i++) { //첫번째 select가 변화하면 나머지 select의 option은 다시 뽑아짐.
+						skill.eq(i).val('');
+					}
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		[소유스킬]
+		<span id="skills">
+			<select id="skill1">
+				<option value="">
+				<option value="JSP">JSP
+				<option value="ASP">ASP
+				<option value="PHP">PHP
+				<option value="Oracle">Oracle
+				<option value="Java">Java
+			</select>
+			<select id="skill2">
+				<option value="">
+				<option value="JSP">JSP
+				<option value="ASP">ASP
+				<option value="PHP">PHP
+				<option value="Oracle">Oracle
+				<option value="Java">Java
+			</select>
+			<select id="skill3">
+				<option value="">
+				<option value="JSP">JSP
+				<option value="ASP">ASP
+				<option value="PHP">PHP
+				<option value="Oracle">Oracle
+				<option value="Java">Java
+			</select>
+			<select id="skill4">
+				<option value="">
+				<option value="JSP">JSP
+				<option value="ASP">ASP
+				<option value="PHP">PHP
+				<option value="Oracle">Oracle
+				<option value="Java">Java
+			</select>
+			<select id="skill5">
+				<option value="">
+				<option value="JSP">JSP
+				<option value="ASP">ASP
+				<option value="PHP">PHP
+				<option value="Oracle">Oracle
+				<option value="Java">Java
+			</select>
+		</span>
+		<input type="button" id="reset" value="초기화">
+		</form>
+	</body>
+</html>

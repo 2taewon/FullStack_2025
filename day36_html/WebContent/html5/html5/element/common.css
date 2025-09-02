@@ -1,0 +1,111 @@
+body {
+	margin: 0;
+}
+h1 {
+	width: 190px;
+	padding: 5px;
+	font-size: 24px;
+	font-weight: bold;
+	font-family: Arial;
+	color: #FFFF00;
+	background: #999999;
+	border-bottom: 3px solid #FFFFFF;
+	margin: 0
+}
+
+h2 {
+	padding: 5px;
+	font-size: 24px;
+	font-weight: bold;
+	font-family: Arial;
+	color: #FFFF00;
+	background: #666666;
+	border-bottom: 3px solid #FFFFFF;
+	margin: 0
+}
+
+#logo {
+	border-radius: 30px 0;	
+	-moz-border-radius:30px 0;
+	-webkit-border-top-left-radious:30px;
+	-webkit-border-bottom-right-radius:30px;
+	font-family: Arial;
+	font-size: 100px;
+	color: #FFFFFF;
+	font-weight: bold;
+	background: #000000;
+	width: 760px;
+	padding: 20px
+}
+
+#page {
+	position: relative;
+	width: 800px;
+	overflow: visible
+}
+
+#menu {
+	position: relative;
+	padding: 20px;
+	width: 200px;
+	background: #666666;
+	float: left;
+	height: 400px
+}
+
+#menu ul {
+	margin: 0;
+	padding: 0
+}
+
+#menu li {
+	width: 190px;
+	padding: 5px;
+	border-bottom: 1px dotted #FFFFFF;
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+	list-style: none
+}
+
+#contents {
+	position: relative;
+	padding: 20px;
+	background: #999999;
+	font-size: 12px;
+	font-family: Verdana;
+	color: #FFFFFF;
+	width: 380px;
+	float: left;
+	height: 400px
+}
+
+#text {
+	padding: 5px;
+	line-height: 150%;
+	font-family: Verdana;
+	text-align: justify
+}
+
+#links {
+	position: relative;
+	float: left;
+	background: #CCCCCC;
+	width: 100px;
+	padding: 20px;
+	clear: right;
+	height: 400px
+}
+
+#copy {
+	position: relative;
+	clear: both;
+	background: #333333;
+	font-family: Verdana;
+	font-size: 50px;
+	font-weight: bold;
+	color: #FFFFFF;
+	width: 760px;
+	padding: 20px
+}

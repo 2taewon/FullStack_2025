@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h4>전송방식 : get / post</h4>
+	get 방식 전송 : 글자수에 제한 있음(255자), 보안에 취약하다.
+	<h2>Get 전송 방식</h2>
+	<form action = "../jsp/result.jsp" method = "get">
+		이름 : <input type = "text" name ="name" id ="name" placeholder ="id input"> <br /> <!-- name으로도 html 제어 가능 -->
+		비번 : <input type = "password" name ="pwd" id ="pwd"> <br />
+		메일 : <input type = "email" name ="mail" value ="hello@naver.com" readonly> <br /> <!-- value : default값 넣어놓음, readonly : 수정불가.-->
+		
+		<input type ="submit" value = "전송"> &nbsp; &nbsp; &nbsp;
+		<input type = "reset" value = "취소">
+	</form>
+	
+	<h2>Post 전송 방식</h2>
+	<form action = "../jsp/result.jsp" method = "post">
+		이름 : <input type = "text" name ="name" id ="name"> <br /> <!-- name으로도 html 제어 가능 -->
+		비번 : <input type = "password" name ="pwd" id ="pwd"> <br />
+		메일 : <input type = "email" name ="mail"> <br />
+		
+		<input type ="submit" value = "전송"> &nbsp; &nbsp; &nbsp;
+		<input type = "reset" value = "취소">
+	</form>
+</body>
+</html>

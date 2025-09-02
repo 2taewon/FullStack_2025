@@ -1,0 +1,26 @@
+<!--
+	=> 5초후 네이버 페이지로 이동
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+			function movePage( ){
+				location.replace("http://www.naver.com");
+			}
+
+			var count = 6;
+			function timer( ){
+				setTimeout( "timer( )", 1000 );
+				count--;
+				document.getElementById("nowTime").innerHTML=count+"초 후 네이버로 이동";
+				window.setTimeout( "movePage( )", 5000 );
+			}
+			
+		</script>
+	</head>
+	
+	<body onLoad = "timer( );"><center>
+	<div id="nowTime"></div>
+	</body>
+</html>

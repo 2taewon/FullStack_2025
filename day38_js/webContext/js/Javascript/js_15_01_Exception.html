@@ -1,0 +1,33 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+		</script>
+	</head>
+	
+	<body>
+		<script>
+			var msg = "";
+			//배열 위치 이동해보고~
+			try{
+				msg = msg + "[1]"
+				// Array 객체를 생성
+				var arr = new Array(999999999999);
+				msg = msg + "[2]"
+				arr.push("김연아");
+				msg = msg + "[3]"
+				arr.push("박태환");
+				msg = msg + "[4]"
+				arr.push("이상화");
+				msg = msg + "[5]"
+				arr.push("김유신");
+				msg = msg + "[6]"
+				document.write("학생은 총 " + arr.length + "명 입니다.");
+				msg = msg + "[7]"
+			}catch(ex){
+				alert(msg + "예외발생");
+			}
+			
+		</script>
+	</body>
+</html>

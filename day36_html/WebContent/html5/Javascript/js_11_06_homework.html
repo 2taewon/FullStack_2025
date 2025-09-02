@@ -1,0 +1,28 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<title>공부시작</title>
+	</head>
+
+	<body>
+		<script>
+			var lotto = new Array();
+			var suffle_cnt=105;
+			for (var i=0; i<45; i++){
+				lotto[i] = i+1;
+			}
+
+			for (var j=0; j<5; j++){
+				for (var k=0; k<suffle_cnt; k++){
+					var idx1 = Math.floor(Math.random()*lotto.length);
+					var idx2 = Math.floor(Math.random()*lotto.length);
+					var tmp;
+					tmp = lotto[idx1];
+					lotto[idx1] = lotto[idx2];
+					lotto[idx2] = tmp;	
+				}
+				document.write(lotto.splice(0,5)+"<br>");
+			}
+		</script>
+	</body>
+</html>

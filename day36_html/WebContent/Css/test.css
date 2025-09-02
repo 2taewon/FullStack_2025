@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+body {background-color : sky;}
+	
+	.tbl, tr, td, th {
+		border : 1px dotted bule;
+		width : 650px;
+		height : 30px;
+		text-align : center; 
+		border-color : purple;
+		border-collapse : collapse;
+	}
+	
+	#tab {
+		border : 5px dashed pink;
+	}
+	.xy .tbl2 {border : 5px solid black;}

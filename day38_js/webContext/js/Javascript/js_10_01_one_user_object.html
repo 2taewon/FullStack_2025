@@ -1,0 +1,206 @@
+<!--
+	일회성 사용자 정의 객체의 생성, 메소드 , 속성변수 호출
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+			//---------------------------------------
+			// 일회성 사용자 정의 객체를 생성하고 객체의 메소드위치주소값을 sungjuk에 저장
+			//---------------------------------------
+			var sungjuk = {
+				//---------------------------------------
+				//속성변수 선언
+				//---------------------------------------
+				s_no : 1                 // 학생 번호 저장
+				,s_name : "사오정"     // 학생 이름 저장
+				,kor : 90                // 국어 점수 저장
+				,eng : 80               // 영어 점수 저장
+				,mat : 70               // 수학 점수 저장
+				//---------------------------------------
+				// 메소드 선언
+				//---------------------------------------
+				,getTot : function( ){
+				// 동료 속성변수를 더한 합을 리턴
+				// 동료 속성변수를 호출할 경우 this. 붙인다
+					return this.kor + this.eng + this.mat;
+				}
+				,getAvg : function( ){
+				// 동료 메소드를 호출하여 총점을 구한후 평균을 구해 리턴
+				// 동료 메소드를 호출할 경우 this. 붙인다.
+					return this.getTot( )/3;
+				}
+			}
+			//---------------------------------------
+			// 일회성 사용자 정의 객체에 속성변수 추가
+			//---------------------------------------
+			sungjuk.addr = "서울";
+			//---------------------------------------
+			// 일회성 사용자 정의 객체에 메소드 추가
+			//---------------------------------------
+			sungjuk.showMsg = function( year ){
+				return year + " 년도 성적! ";
+			}
+
+			//---------------------------------------
+			// 일회성 사용자 정의 객체를 생성하고 객체의 메소드위치주소값을 data에 저장
+			//---------------------------------------
+			var data = {
+				kor : 90
+				,eng : 88
+				,mat : 78
+				,chemi : 68
+			}
+
+			//---------------------------------------
+			// 일회성 사용자 정의 객체를 n개 생성하고 n개의 객체를 Array객체에 저장
+			//---------------------------------------
+			var sungjuks = new Array();
+			sungjuks.push( { s_no:1, s_name:"메시", kor:100, eng:100, mat:99 } );
+			sungjuks.push( { s_no:2, s_name:"호날두", kor:99, eng:88, mat:78 } );
+			sungjuks.push( { s_no:3, s_name:"네이마르", kor:97, eng:87, mat:77 } );
+			sungjuks.push( { s_no :4, s_name:"포그바", kor:96, eng:86, mat:76 } );
+
+		</script>
+	</head>
+	
+	<body>
+		<script>
+			//---------------------------------------
+			// 일회성 사용자 정의 객체의 속성변수, 메소드 호출
+			//---------------------------------------
+			document.write( sungjuk.showMsg( 2014 ) + "<br>" );
+			document.write( "번호 : " + sungjuk.s_no + "<br>" );
+			document.write( "이름 : " + sungjuk.s_name + "<br>" );
+			document.write( "거주지 : " + sungjuk.addr + "<br>" );
+			document.write( "총점 : " + sungjuk.getTot() + "<br>" );
+			document.write( "평균 : " + sungjuk.getAvg() + "<hr>" );
+
+			//---------------------------------------
+			// 일회성 사용자 정의 객체의 속성변수, 메소드 호출
+			//---------------------------------------
+			with( sungjuk ){
+				document.write(showMsg( 2014 ) + "<br>" );
+				document.write( "번호 : " + s_no + "<br>" );
+				document.write( "이름 : " + s_name + "<br>" );
+				document.write( "거주지 : " + addr + "<br>" );
+				document.write( "총점 : " + getTot() + "<br>" );
+				document.write( "평균 : " + getAvg() + "<hr>" );
+			}
+			//---------------------------------------
+			// 일회성 사용자 정의 객체의 속성변수 삭제
+			//---------------------------------------
+			delete( sungjuk.addr );
+				document.write( sungjuk.showMsg( 2014 ) + "<br>" );
+				document.write( "번호 : " + sungjuk.s_no + "<br>" );
+				document.write( "이름 : " + sungjuk.s_name + "<br>" );
+				document.write( "거주지 : " + sungjuk.addr + "<br>" );
+				document.write( "총점 : " + sungjuk.getTot() + "<br>" );
+				document.write( "평균 : " + sungjuk.getAvg() + "<hr>" );
+
+			//---------------------------------------
+			// 일회성 사용자 정의 객체의 속성변수 호출
+			//---------------------------------------
+			document.write( "국어 : " + data.kor + "<br>" );
+			document.write( "영어 : " + data.eng + "<br>" );
+			document.write( "수학 : " + data.mat + "<br>" );
+			document.write( "화학 : " + data.chemi + "<hr>" );
+
+			//---------------------------------------
+			// 일회성 사용자 정의 객체의 속성변수 for in 반복문으로 모두 호출
+			//---------------------------------------
+			var tot = 0;
+			for (var subject in data){
+				// 일회성 사용자 정의 객체의 속성변수 호출은 아래처럼 두 가지로 가능하다
+				// <방법1> 객체 참조변수명.속성변수명
+				// <방법2> 객체참조변수명["속성변수명"]
+				//---------------------------------------
+				// for in 반복문에서 subject 변수안에는 차례대로 속성변수명이 문자열로 저장된다.
+				document.write(subject + " : " + data[subject] + "<br>" );
+				tot += data[subject]
+			}
+			document.write("총점 : " + tot + "<hr>");
+
+			//---------------------------------------
+			// Array 객체 저장된 n개의 일회성 사용자 정의 객체의 속성변수 호출
+			//---------------------------------------
+			document.write( "<table border=1 cellspacing=0 cellpadding=9>" );
+			document.write( "<tr><th>학번<th>이름<th>국어<th>영어<th>수학<th>총점<th>평균" );
+			for ( var i=0; i<sungjuks.length; i++ ){
+				var tot = sungjuks[i].kor + sungjuks[i].eng + sungjuks[i].mat;
+				var avg = tot/3;
+				document.write( "<tr>" );
+				document.write( "<td>" +sungjuks[i].s_no );
+				document.write( "<td>" +sungjuks[i].s_name );
+				document.write( "<td>" +sungjuks[i].kor );
+				document.write( "<td>" +sungjuks[i].eng );
+				document.write( "<td>" +sungjuks[i].mat );
+				document.write( "<td>" +tot );
+				document.write( "<td>" +Math.floor(avg) );
+			}
+			document.write( "</table>" );
+			document.write( "<hr>" );
+			//---------------------------------------
+			var xxx = { v:[3,5,7], w:{no:1, name:"김도걍", jumsu:[77,88,99] } };
+			//---------------------------------------
+			// 김도걍 이란 문자 출력방법
+			document.write( xxx.w.name + "<br>" );
+			// 88 이란 숫자 출력방법
+			document.write( xxx.w.jumsu[1] + "<br>" );
+			// 모든 배열 변수의 개수 출력방법
+			document.write( ( xxx.v.length + xxx.w.jumsu.length ) + "<br>" );
+			// jumsu 77을 80으로 수정하는 방법
+			 xxx.w.jumsu[0]=80;
+			document.write(  xxx.w.jumsu[0]+ "<hr>" );
+
+			//---------------------------------------
+			// 
+			//---------------------------------------
+			var ddd = [
+				{ name:"사오정", jumsu:[ 77,88,99 ] } 
+				,[
+					{ name:"저팔계", jumsu:[ 71,81,91 ] }
+					,{ name:"손오공", jumsu:[ 66,74,86 ] }
+					,{ name:"삼장법사", jumsu:[ 55,65,75 ] }
+				]
+			];
+			// 삼장법사 문자 출력방법
+			document.write( ddd[1][2].name+ "<br>" );
+			// 65란 숫자 출력방법   
+			document.write( ddd[1][2].jumsu[1]+ "<br>" );
+			// 99란 숫자 출력방법
+			document.write( ddd[0].jumsu[2]+ "<hr>" );
+			
+			var ddd = [
+				{ name:function( ){ return "사오정" }, jumsu:[ 77,88,99 ] } 
+				,[
+					{ name:function( ){ return "저팔계" }, family:{ father:"비", mother:"김태희" } }
+				]
+			];
+			// 사오정이란 문자 출력방법
+			document.write( ddd[0].name() + "<br>" );
+			// 저팔계 란 문자 출력방법
+			document.write( ddd[1][0].name() + "<br>" );
+			// 김태희란 문자 출력방법
+			document.write( ddd[1][0].family.mother + "<hr>" );
+
+		var ggg = {
+			bbb:{ 
+				x:[1,3,{ b:"서은지" }] 
+			}
+			, ccc : [ [ [ 7,8,9 ] ] ]
+			, ddd : { 
+				a: [ 11, function( ){ return "강아지" } ] 
+			}
+		}
+		//서은지 출력
+		document.write(ggg.bbb.x[2].b + "<br>");
+		//9출력
+		document.write(ggg.ccc[0][0][2] + "<br>");
+		//강아지 출력
+		document.write(ggg.ddd.a[1]() );
+
+
+		</script>
+	</body>
+</html>

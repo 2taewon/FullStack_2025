@@ -1,0 +1,338 @@
+<!-- 현재 문서가 입력문서가 아닌 수정 문서라고 가정하고 DB에서 가져온 데이터를 입력양식에 삽입 또는 체크해보자-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+		//**********************************************
+		//DB에서 가져온 데이터를 입력양식에 삽입 또는 체크해주는 함수 선언
+		//**********************************************
+		function inputData(){
+			// DB에서 가져온 아이디 값을 가져와 변수에 저장
+			document.memberUpdateForm.uid.value = "xyz123456";
+			// DB에서 가져온 암호 값을 가져와 변수에 저장
+			document.memberUpdateForm.pwd.value = "12345678";
+			// DB에서 가져온 소유스킬에 해당하는 입력양식을 체크하기
+			// DB에서 가져온 소유스킬이 Java, Oracle이라고 가정한다.
+			for ( var i =0; i<document.memberUpdateForm.skill.length; i++ ){
+				if ( document.memberUpdateForm.skill[i].value == "Java" ){
+					document.memberUpdateForm.skill[i].checked = true;
+					// 위 코딩은 아래 처럼도 가능
+					// checkbox객체의 click() 메소드를 호출하면 클릭하는 행위가 발생된다.
+					//document.memberUpdateForm.skill[i].click();
+				}if ( document.memberUpdateForm.skill[i].value == "Oracle" ){
+					document.memberUpdateForm.skill[i].checked = true;
+				}
+			}
+			// DB에서 가져온 최종학력에 해당하는 입력양식을 체크하기
+			// DB에서 가져온 최종학력이 전문대라고 가정한다.
+			for ( var i =0; i<document.memberUpdateForm.school.length; i++ ){
+				if ( document.memberUpdateForm.school[i].value == "전문대졸" ){
+					document.memberUpdateForm.school[i].checked = true;
+				}
+			}
+			// DB에서 가져온 거주지에 해당하는 입력양식을 체크하기
+			// DB에서 가져온 거주지가 서울라고 가정한다.
+			document.memberUpdateForm.addr.value = "서울";
+			// DB에서 가져온 생일에 해당하는 입력양식을 3개를 체크하기
+			// DB에서 가져온 생일이 "2019년 12월 22"라고 가정한다.
+			var birth = "2019-12-22";
+			var births = birth.split("-");
+			document.memberUpdateForm.birth_year.value = births[0];
+			document.memberUpdateForm.birth_month.value = births[1];
+			document.memberUpdateForm.birth_date.value = births[2];
+			/* 위 3줄의 코딩은 아래 방법들로 대체 가능
+			<방법1>---------------------------------------------------------------
+			document.memberUpdateForm.birth_year.value = birth.substring[0,4];
+			document.memberUpdateForm.birth_month.value = birth.substring[5,7];
+			document.memberUpdateForm.birth_date.value = birth.substring[8,10];
+			<방법2>---------------------------------------------------------------
+			document.memberUpdateForm.birth_year.value = birth.substr[0,4];
+			document.memberUpdateForm.birth_month.value = birth.substr[5,2];
+			document.memberUpdateForm.birth_date.value = birth.substr[8,2];
+			*/
+			// DB에서 가져온 주민번호에 해당하는 입력양식에 삽입하기
+			// DB에서 가져온 주민번호가 931234-1234567라고 가정한다.
+			var jumin_num = "931234-1234567";
+			document.memberUpdateForm.jumin_num1.value = jumin_num.substr(0,6);
+			document.memberUpdateForm.jumin_num2.value = jumin_num.substr(7,7);
+
+		}
+		
+		//**********************************************
+		// 저장 버튼을 누르면 호출되는 함수
+		// 입력양식들의 유효성 체크를 한 후 모두 유효성에 합당하면
+		// 서버로 전송하는 기능을 가지고 있다.
+		//**********************************************
+		function checkForm( ){
+			//----------------------------------------------------------------------
+			// name=memberUpdateForm 을 가진 폼태그 내부의 데이터를 보낼 웹서버의 주소 설정
+			// form 객체의 action 이란 속성변수안에 서버의 URL 주소 저장
+			// form 태그 내부의 입력양식의 값들이 이 서버의 URL 주소로 전송된다.
+			//----------------------------------------------------------------------
+			document.memberUpdateForm.action="http://www.naver.com";
+			//----------------------------------------------------------------------
+			// name=memberUpdateForm 을 가진 폼태그 내부의 입력양식을 데이터를 서버로 보낼때 보내는 방법을 설정
+			// get 방식이면 모든 데이터가 URL 뒤에 붙어서 가고
+			// post 방식이면 URL 뒤에 붙지 않고 보낸다.
+			//----------------------------------------------------------------------
+			document.memberUpdateForm.method="post";
+
+			//----------------------------------------------------------------------
+			// 아이디값 유효성 체크하기
+			//----------------------------------------------------------------------
+			// 사용자가 웹브라우저 화면에서 입력한 아이디 값을 가져와 변수에 저장
+			var uid = document.memberUpdateForm.uid.value;
+			// 아이디 유효성 체크를 위해 RegExp 객체 생성
+			var regExp_id = new RegExp( /^[a-z][a-z0-9_]{6,14}$/ );
+			// 만약 아이디가 잘못된 문자 패턴이면 경고하고 중단
+			if ( regExp_id.test( uid ) == false ){
+				alert("[아이디] 입력 규칙에 맞지 않음. 재입력 바람!\n<1> 영소문자 또는 숫자 또는 언더바(_)로 구성되야함.\n<2> 글자수는 7~15로 구성되어야함\n<3> 첫글자는 영문이어야함.\n");
+				// 입력된 아이디 비우기
+				document.memberUpdateForm.uid.value="";
+				// 아이디 입력란에 촛점 들여놓기. 즉 커서 들여 놓기
+				document.memberUpdateForm.uid.focus();
+				return;
+			}
+
+			//----------------------------------------------------------------------
+			// 암호값 유효성 체크하기
+			//----------------------------------------------------------------------
+			// 사용자가 웹브라우저 화면에서 입력한 아이디 값을 가져와 변수에 저장
+			var pwd = document.memberUpdateForm.pwd.value;
+			// 아이디 유효성 체크를 위해 RegExp 객체 생성
+			var regExp_pwd = new RegExp( /^[a-z0-9]{8,16}$/ );
+			// 만약 아이디가 잘못된 문자 패턴이면 경고하고 중단
+			if ( regExp_pwd.test( pwd ) == false ){
+				alert("[암호] 입력 규칙에 맞지 않음. 재입력 바람!\n<1> 영소문자 또는 숫자로 구성되야함.\n<2> 글자수는 8~16로 구성되어야함\n");
+				// 입력된 아이디 비우기
+				document.memberUpdateForm.pwd.value="";
+				// 아이디 입력란에 촛점 들여놓기. 즉 커서 들여 놓기
+				document.memberUpdateForm.pwd.focus();
+				return;
+			}
+
+			//----------------------------------------------------------------------
+			// 스킬 유효성 체크, 1개 이상 선택하기
+			//----------------------------------------------------------------------
+			// 체크한 스킬의 개수를 저장하는 변수 선언
+			var skill_cnt=0;
+			// i번째 스킬이 체크되어 있으면 변수 skill_cnt 1 업데이트하기
+			for ( var i=0; i<document.memberUpdateForm.skill.length; i++ ){
+				if( document.memberUpdateForm.skill[i].checked == true ){//true 생략가능
+					skill_cnt++;
+				}
+			}
+			//skill_cnt가 0이면 (=아무것도 체크되어 있지 않으면) 경고하고 함수 중단
+			if ( skill_cnt == 0 ){
+				alert( "소유스킬은 1개이상 선택요망!" );
+				return;
+			}
+
+			//----------------------------------------------------------------------
+			// 학력 유효성 체크
+			//----------------------------------------------------------------------
+			var school_cnt=0;
+			// i번째 스킬이 체크되어 있으면 변수 skill_cnt 1 업데이트하기
+			for ( var i=0; i<document.memberUpdateForm.school.length; i++ ){
+				if( document.memberUpdateForm.school[i].checked == true ){//true 생략가능
+					school_cnt++;
+				}
+			}
+			//skill_cnt가 0이면 (=아무것도 체크되어 있지 않으면) 경고하고 함수 중단
+			if ( school_cnt == 0 ){
+				alert( "최종학력 선택요망!" );
+				return;
+			}
+			/*
+			if (document.memberUpdateForm.school.value == ""){
+				alert("최종 학력 선택요망!");
+				return;
+			}
+			*/
+
+			//----------------------------------------------------------------------
+			// 거주지 유효성 체크
+			//----------------------------------------------------------------------
+			//선택한 [거주지]를 변수 addr에 저장
+			var addr = document.memberUpdateForm.addr.value;
+			//선택한 [거주지]가 없으면 경고하고 함수 중단
+			if ( addr == "" ){
+				alert( "거주지 입력요망" );
+				return;
+			}
+
+			//----------------------------------------------------------------------
+			// 생일 유효성 체크
+			//----------------------------------------------------------------------
+			// 선택한 생일의 년, 월, 일을 변수 birth_year, birth_month, birth_date 에 저장
+			var birth_year = document.memberUpdateForm.birth_year.value;
+			var birth_month = document.memberUpdateForm.birth_month.value;
+			var birth_date = document.memberUpdateForm.birth_date.value;
+			if ( birth_year == "" || birth_month == "" || birth_date == "" ){
+				alert( "생일은 년,월,일 모두 입력요망" );
+				return;
+			}
+			//선택한 생일의 년, 월, 일을 숫자로 변환
+			var birth_year = parseInt( birth_year, 10 );
+			var birth_month = parseInt( birth_month, 10 );
+			var birth_date =parseInt( birth_date, 10 );
+			//선택한 생일의 년, 월, 일을 관리하는 Date객체 생성
+			var date = new Date( birth_year, birth_month-1, birth_date );
+			//Date 객체가 관리하는 생일의 년, 월, 일이 선택한 년 월 일과 1개라도 다르면 경고하고 비우고 함수중단
+			if ( birth_year != date.getFullYear( )
+					|| birth_month != date.getMonth( )+1 
+						|| birth_date != date.getDate( ) ){
+				alert( "존재하지 않는 생일입니다." );
+				document.memberUpdateForm.birth_year.value = "";
+				document.memberUpdateForm.birth_month.value = "";
+				document.memberUpdateForm.birth_date.value = "";  
+				return;
+			}
+			
+			//----------------------------------------------------------------------
+			// 주민번호 유효성 체크
+			//----------------------------------------------------------------------
+			// 입력된 첫째 주민번호 얻어와 변수jumin_num1 에 저장
+			var jumin_num1 = document.memberUpdateForm.jumin_num1.value;
+			// 입력된 두번째 주민번호 얻어와 변수jumin_num2 에 저장
+			var jumin_num2 = document.memberUpdateForm.jumin_num2.value;
+			// 첫째, 두번쨰 주민번호 유효성체크하기
+			var regExp_jumin_num1 = new RegExp( /^[0-9]{6}$/ );
+			var regExp_jumin_num2 = new RegExp( /^[1-4][0-9]{6}$/ );
+			if ( regExp_jumin_num1.test(jumin_num1) == false ){
+				alert("주민번호 첫쨰 자리는 숫자 6개이어야합니다.");
+				document.memberUpdateForm.jumin_num1.value = "";
+				return;
+			}
+			if ( regExp_jumin_num2.test(jumin_num2) == false ){
+				alert("주민번호 두번쨰 자리는 숫자 7개이어야합니다.");
+				document.memberUpdateForm.jumin_num2.value = "";
+				return;
+			}
+			//----------------------------------------------------------------------
+			// 숙지사항 체크가 안되 있으면 경고하고 함수중단
+			//----------------------------------------------------------------------
+			if( document.memberUpdateForm.is_confirm.checked == false ){//true 생략가능
+				alert( "숙지사항은 필수 체크입니다!" );
+				return;
+			}
+			
+
+			//----------------------------------------------------------------------
+			// 등록여부 묻기
+			// confirm  함수를 호출하여 확인 또는 취소 버튼을 눌러
+			//취소버튼을 누르면 함수 중단하기
+			//----------------------------------------------------------------------
+			if ( confirm("정말 등록하시겠습니까?" ) == false ){ return; }
+
+			//----------------------------------------------------------------------
+			// form 객체의 action이란 송성변수안에 저장된 url주소로 폼태그 내부의
+			//모든 입력 양식의 value값이 전송
+			//----------------------------------------------------------------------
+			document.memberUpdateForm.submit( );
+
+		}
+		</script>
+	</head>
+	
+	<body onload="inputData( );"><center>
+		<form name="memberUpdateForm" enctype="multipart/form-data">
+			<!-- -------------------------------------------------------------->
+			<table border=1 cellpadding=10 cellspacing=5>
+			<!-- -------------------------------------------------------------->
+				<tr>
+					<th>아이디
+					<td><input type="text" name="uid" size=8>
+				</tr>
+				<tr>
+					<th>암호
+					<td><input type="password" name="pwd" size=8>
+				</tr>
+				<tr>
+					<th>소유스킬
+					<td>
+						<input type="checkbox" name="skill" value="Java">Java
+						<input type="checkbox" name="skill" value="JSP">JSP
+						<input type="checkbox" name="skill" value="Spring">Spring
+						<input type="checkbox" name="skill" value="Oracle">Oracle
+				</tr>
+				<tr>
+					<th>최종학력
+					<td>
+						<input type="radio" name="school" value="중졸">중졸
+						<input type="radio" name="school" value="고졸">고졸
+						<input type="radio" name="school" value="전문대졸">전문대졸
+						<input type="radio" name="school" value="일반대졸">일반대졸
+				</tr>
+				
+				<tr>
+					<th>거주지역
+					<td>
+						<select name="addr">
+							<option value="">선택
+							<option value="서울">서울
+							<option value="경기">경기
+							<option value="인천">인천
+							<option value="전라도">전라도
+							<option value="경상도">경상도
+							<option value="부산">부산
+							<option value="충청도">충청도
+							<option value="제주도">제주도
+							<option value="기타">기타
+						</select>
+				</tr>
+				<tr>
+					<th>생일
+					<td>
+						<select name="birth_year" onChange="checkBirthDay( );">
+							<option value="">
+							<script>
+								for ( var i=2000; i<=new Date().getFullYear()+1; i++ ){
+									document.write( "<option value=" + i + ">" + i );
+								}
+							</script>
+						</select>년
+						<select name="birth_month">
+							<option value="">
+							<script>
+								for ( var i=1; i<=12; i++ ){
+									var m = ( i<10 )?"0"+i:i;
+									document.write( "<option value=" + m + ">" + m );
+								}
+							</script>
+						</select>월
+						<select name="birth_date">
+							<option value="">
+							<script>
+								for ( var i=1; i<=31; i++ ){
+									var m = ( i<10 )?"0"+i:i;
+									document.write( "<option value=" + m + ">" + m );
+								}
+							</script>
+						</select>일
+				</tr>
+				<tr>
+					<th>주민번호
+					<td>
+						<input type="text" name="jumin_num1" maxlength=6> - 
+						<input type="text" name="jumin_num2" maxlength=7>
+				</tr>
+				<tr>
+					<th>사진
+					<td>
+						<input type="file" name="pic">
+				</tr>
+				<tr>
+					<th>숙지사항
+					<td>
+						입력하신 개인 정보는 회사 소유입니다.
+						<input type="checkbox" name="is_confirm" value="확인">확인
+				</tr>
+			<!-------------------------------------->
+			</table>
+			<!-------------------------------------->
+			<input type="button" value="   저장   " onClick="checkForm( )">
+		</form>
+	</body>
+</html>
+

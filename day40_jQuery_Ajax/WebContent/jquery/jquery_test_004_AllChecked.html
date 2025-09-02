@@ -1,0 +1,91 @@
+<!-- 
+	=>JQuery를 사용하여 checkbox에 change 이벤트가 발생하면 실행할 코드를 설정한다
+	=> JQuey의 prop(~)메소드를 사용하여 하나의 checkbox를 클릭하면 
+		여러개의 다른 checkbox를 체크하거나 해제한다.
+-->
+<html>
+	<meta charset="UTF-8">
+		
+	<head>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+		//----------------------------------------------------
+		// $(document).ready( function(){자스코딩} );
+		//----------------------------------------------------
+			//body 태그 안의 요소들을 읽어들인후 익명함수 내부의 자스코딩을 실행.
+			$(document).ready( function(){
+				//name=hobby_all을 가진 태그를 관리하는 JQuery 객체의 메위주를 obj변수에 저장
+				var obj = $("[name=hobby_all]");
+				//*********************************
+				// name=hobby_all을 가진 태그에 change라는 이벤트가 발생하면 실행할 코드 설정.
+				// 즉 체크가 들어가거나 체크가 빠지면 실행할 코드 설정하기
+				//*********************************
+				obj.change( function(){
+					//<방법1>-------------------------------------------------
+					// 만약에 name=hobby_all 을 가진 태그에 체크가 되어 있으면
+					// name=hobby을 가진 태그에 체크하기
+					if ( obj.is(":checked")){ //   obj.filter(":checked").length==1 도 가능
+						$("[name=hobby]").prop("checked",true);
+					}
+					// name=hobby_all을 가진 태그에 체크되어 있지 않으면
+					// name=hobby을 가진 태그에 체크 풀기
+					else{
+						$("[name=hobby]").prop("checked",false);
+					}
+					//<방법2>-------------------------------------------------
+					//$("[name=hobby]").prop("checked", obj.is(":checked"));
+				});
+				//*********************************
+				// name=hobby을 가진 태그에 change라는 이벤트가 발생하면 실행할 코드 설정.
+				//*********************************
+				$("[name=hobby]").change( function(){
+					//<방법1>-------------------------------------------------
+					// name=hobby을 가진 태그에 체크가 안된놈이 1개 이상 있으면
+					// name=hobby_all을 가진 태그에 체크 풀기
+					if ($("[name=hobby]:not(:checked)").length>0){
+						obj.prop("checked", false);
+					}else{
+						obj.prop("checked", true);
+					}
+					//<방법2>-------------------------------------------------
+					//obj.prop( "checked", $("[name=hobby]:not(:checked)").length>0 ==false);
+					//<방법3>-------------------------------------------------
+					//obj.prop( "checked", !($("[name=hobby]:not(:checked)").length>0) );
+				});
+				
+			});
+
+
+/*
+//<방법4    Input에 onChange 넣기(check, checkAll)>---------------------
+			function check( ){
+				if ( $("[name=hobby]:checked").length == 4){
+					$("[name=hobby_all]").prop("checked",true);
+				}else{
+					$("[name=hobby_all]").prop("checked",false);
+				}
+			}
+			function checkAll(){
+				if ($("[name=hobby_all").is(":checked")){
+					$(":checkbox").prop("checked",true);
+				}else{
+					$(":checkbox").prop("checked",false);
+				}
+				
+			}
+			*/
+
+		</script>
+	</head>
+	
+	<body><center>
+		<hr>
+		<input type="checkbox" name="hobby_all" >전체
+		<hr>
+		<input type="checkbox" name="hobby" value="독서">독서<br>
+		<input type="checkbox" name="hobby" value="운동" >운동<br>
+		<input type="checkbox" name="hobby" value="여행">여행<br>
+		<input type="checkbox" name="hobby" value="수집" >수집
+		
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Canvas Gradient</title>
+
+</head>
+<body>
+
+	<canvas id="myCanvas" width="700" height="300"
+		style="border: 1px solid #c3c3c3;"></canvas>
+
+
+	<script type="text/javascript">
+	window.onload = function(){
+	    var canvas = document.getElementById("myCanvas");
+	    var context = canvas.getContext("2d");
+	 
+	    var x = 30;
+	    var y = 30;
+	    context.font = "30pt 굴림";
+	    context.fillStyle = "#0000ff"; // text color
+	   	context.scale(1.5,1.5);
+	    context.fillText("Hello World!", x, y);
+	   // context.strokeText("Hello World!", x, y)
+	};
+	</script>
+
+</body>
+</html>

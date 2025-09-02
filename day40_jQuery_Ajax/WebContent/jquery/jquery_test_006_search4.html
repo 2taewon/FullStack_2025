@@ -1,0 +1,130 @@
+<!-- 
+	[검색 키워드]를 입력하고 [검색] 버튼 클릭하면 [검색 결과]만 화면에 보여준다
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<style>.style1{ background-color:#00f; color:#fff; }</style>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready( function(){ 
+				//-------------------------------------
+				// class=search 가진 태그에 click 이벤트가 일어나면
+				// 모든 행을 보여주는 코딩 설정하기
+				//-------------------------------------
+				$(".search").click( function( ){
+					//-------------------------------------
+					// class="sungjuk" 가진 태그 후손의 tbody 태그 후손의 tr태그를 관리하는
+					// JQuery 객체의 메위주를 변수 trObj에 저장하기
+					//-------------------------------------
+					var trObj = $(".sungjuk tbody tr");
+					//-------------------------------------
+					// 모든 tr을 감추기
+					//-------------------------------------
+					trObj.hide();
+					//-------------------------------------
+					// 체크된 checkbox의 value 값을 Array객체에 저장하기
+					//-------------------------------------
+					var hakjums = [];
+					//-------------------------------------
+					// name=hakjum 가진 태그에 차례대로 접근해서
+					// 익명함수 안의 코딩을 실행한다
+					//-------------------------------------
+					$("[name=hakjum]").each( function( ){
+						// n번째 name=hakjum 을 가진 놈을 관리하는 JQuery 객체의
+						// 메위주를 변수 thisObj에 저장하기
+						var thisObj = $(this);
+						// 만약에 n번쨰 놈이 체크가 되어 있으며 ㄴArray 객체에 value값 저장하기
+						if (thisObj.is(":checked")){
+						//if (thisObj.filter(":checked").length == 1)
+							hakjums.push(thisObj.val());
+						}
+					});
+					//-------------------------------------
+					// Array객체안의 배열변수가 0개면, 즉 체크된 학점이 없으면 함수중단
+					//-------------------------------------
+					if (hakjums.length==0){return;}
+					//-------------------------------------
+					// 여러 tr에 차례대로 접근해서 각 tr 내부에 선택학점에 맞는 평균이 있으면
+					// tr태그 보이게 하기
+					//-------------------------------------
+					trObj.each( function(){
+						//-------------------------------------
+						// n번째 tr태그 안의3번째 td가 둘러싼 문자(=평균)를 얻은 후
+						// 대문자로 수정해서  tdData3 변수에 저장
+						// 즉 n번째 tr태그 안의 평균을 꺼내서 tdData3 변수에 저장
+						//-------------------------------------
+						var tdData3 = $(this).children().eq(2).text().toUpperCase();
+						//-------------------------------------
+						// n번째 tr 내부의 평균이 Array객체에 저장된\
+						// 선택 학점에 맞는 점수면 flag에 true 저장하기
+						//-------------------------------------
+						var flag = false;
+						for ( var i=0; i<hakjums.length; i++ ){
+							if ( hakjums[i] == "A" && 90<=tdData3 && 100>=tdData3){ flag = true;}
+							else if ( hakjums[i] == "B" && 80<=tdData3 && 90>tdData3){ flag = true;}
+							else if ( hakjums[i] == "C" && 70<=tdData3 && 80>tdData3){ flag = true;}
+							else if ( hakjums[i] == "D" && 60<=tdData3 && 70>tdData3){ flag = true;}
+							else if ( hakjums[i] == "F" && 50<=tdData3 && 60>tdData3){ flag = true;}
+						}
+						//-------------------------------------
+						// flag에 true가 있으면 n번쨰 tr 보이기
+						//------------------------------------
+						if (flag==true){
+							$(this).show();
+						}
+					});
+
+				});
+				//-------------------------------------
+				// class=allsearch 가진 태그에 click 이벤트가 일어나면
+				// 모든 행을 보여주는 코딩 설정하기
+				//-------------------------------------
+				$(".allsearch").click( function( ){
+					// 체크된 학점 체크 풀기
+					$("[name=hakjum]").prop("checked", false);
+					//모든 tr 을 보여라.
+					$(".sungjuk tbody tr").show();
+					//키워드에 입력한 문자열을 지워라
+				
+				});
+
+			});
+		</script>
+	</head>
+	
+	<body><center>
+		<input type="checkbox" name="hakjum" value="A">A학점
+		<input type="checkbox" name="hakjum" value="B">B학점
+		<input type="checkbox" name="hakjum" value="C">C학점
+		<input type="checkbox" name="hakjum" value="D">D학점
+		<input type="checkbox" name="hakjum" value="F">F학점<br><br>
+		<!-- --------------------------------------------------------- -->
+		<input type="button" value="검색" class="search">
+		<input type="button" value="모두 검색" class="allSearch"><br><br>
+		<!-- --------------------------------------------------------- -->
+		<table border="1" cellpadding="5" class="sungjuk">
+			<thead>
+				<tr><th>번호<th>이름<th>평균
+			</thead>
+			<tbody>
+				<tr><td>101<td>Johnx<td>87
+				<tr><td>102<td>Naman<td>90
+				<tr><td>103<td>Chirag<td>85
+				<tr><td>104<td>David<td>92
+				<tr><td>105<td>Kelly<td>81
+				<tr><td>106<td>Charles<td>77
+				<tr><td>107<td>Jerry<td>91
+				<tr><td>108<td>Beth<td>87
+				<tr><td>109<td>Caroline<td>82
+				<tr><td>110<td>Hanen<td>71
+				<tr><td>111<td>Douglas<td>57
+				<tr><td>112<td>Tim<td>86
+				<tr><td>113<td>Michael<td>68
+				<tr><td>114<td>Kimbley<td>88
+				<tr><td>115<td>Christinax<td>72
+				<tr><td>116<td>권<td>72
+			</tbody>
+		</table>
+	</body>
+</html>

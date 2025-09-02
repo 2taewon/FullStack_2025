@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.box{
+	width : 200px;
+	height : 200px;
+	background-color : orange;
+	transition : 1s;
+	
+}
+/*
+.box:focus{
+	width : 300px;
+	background-color : royalblue;
+}
+
+input:focus {
+	background-color : pink;
+}
+
+.fruits span:first_child {
+	color : red;
+}
+
+.fruits h3:last-child {
+	color : blue;
+}
+
+.fruits *:nth-child(2) { <!-- n은 0부터 시작 -->
+	color : red;
+}
+
+.fruits *:nth-child(n+2) {
+	color : red;
+}
+
+.fruits *:not(span){ <!-- *옆에 띄어쓰기가 있으면 적용이 안됨. -->
+	color: red;
+}*/

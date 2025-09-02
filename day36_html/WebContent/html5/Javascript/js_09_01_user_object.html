@@ -1,0 +1,123 @@
+<!--
+	사용자 정의 생성자 함수를 만들고 사용자 정의 객체를 생성하여 메소드를 호출해 보자
+-->
+
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+		//둘째자리 반올림 함수
+			function upup (num){
+				var xxx = num*100;
+				if(xxx%10>=5){
+					xxx=xxx+10;
+				}
+				xxx = Math.floor(xxx/10)/10;
+				//xxx= (xxx-xxx%10)/100;
+				return xxx;
+			}
+
+
+			//-------------------------------------
+			// sunguk 라는 이름의 [생성자 함수] 선언
+			//-------------------------------------
+			function Sungjuk( s_no, kor, eng, math ){
+				//-------------------------------------
+				// 속성변수 선언
+				//-------------------------------------
+				//매개변수 s_no 안의 데이터를 속성변수 s_no에 저장하기
+				this.s_no = s_no;
+				//매개변수 kor 안의 데이터를 속성변수 kor에 저장하기
+				this.kor = kor;
+				//매개변수 eng 안의 데이터를 속성변수 eng에 저장하기
+				this.eng = eng;
+				//매개변수 math 안의 데이터를 속성변수 math에 저장하기
+				this.math = math;
+				//-------------------------------------
+				//메소드 선언
+				//-------------------------------------
+				//속성변수 S_no안의 데이터를 리턴하는 메소드 선언
+				this.getS_no = function( ){
+					return this.s_no;
+				}
+				//총점을 리턴하는 메소드 선언
+				this.getTot = function( ){
+					var tot = this.kor + this.eng + this.math;
+					return tot;
+				}
+				//평균을 소수점 첫번째자리에서 반올림해서 리턴하는 메소드 선언
+				this.getAvg = function( ){
+					var avg = upup (this.getTot( )/3);
+					return avg;
+				}
+			}
+		</script>
+	</head>
+	
+	<body>
+		<script>
+			var sungjuk1 = new Sungjuk(1, 90, 20, 77);
+				//(1) sungjuk1 이란 변수 선언
+				//(2) Sungjuk 이란 생성자함수를 메모리 공간으로 올려 객체화
+				//(3) 메모리공간에 올려진 생성자 함수 Sungjuk를 Sungjuk(1, 90, 20, 77) 형식으로 호출 
+				//(4) Sungjuk 객체의 메모리 위치주소값 리턴하여 sungjuk1 변수에 저장
+			//--------------------------------------
+			//Sungjuk 객체의 메소드를 호출하여 얻은 데이터를 출력
+			//--------------------------------------
+			document.write("학번 : " + sungjuk1.getS_no() + "<br>");
+			document.write("총점 : " + sungjuk1.getTot() + "<br>");
+			document.write("평균 : " + sungjuk1.getAvg() + "<hr>");
+
+			var sungjuk2 = new Sungjuk(2, 90, 89, 78);
+			document.write("학번 : " + sungjuk2.getS_no() + "<br>");
+			document.write("총점 : " + sungjuk2.getTot() + "<br>");
+			document.write("평균 : " + sungjuk2.getAvg() + "<hr>");
+
+			var sungjuk_arr = [];// var sunjuk_arr = new Array();
+			//--------------------------------------
+			//Array객체에  2개의 sungjuk 객체의 메모리 위치주소값 저장
+			//--------------------------------------
+			sungjuk_arr.push( sungjuk1 );
+			sungjuk_arr.push( sungjuk2 );
+			//--------------------------------------
+			//Array객체에 저장된 sungjuk 객체의 메소드 호출
+			//--------------------------------------
+			for (var i =0; i< sungjuk_arr.length; i++){
+				document.write("학번 : " + sungjuk_arr[i].getS_no() + "<br>");
+				document.write("총점 : " + sungjuk_arr[i].getTot() + "<br>");
+				document.write("평균 : " + sungjuk_arr[i].getAvg() + "<br><br>");
+			}
+			document.write("<hr>");
+			//document.write("학번 : " + sungjuk_arr[0].getS_no() + "<hr>");
+
+
+			//--------------------------------------
+			//Array객체 안의 배열변수에 저장된 Sungjuk 객체의 순서를 평균에 따라 오름차순으로 바꾸기
+			//즉 평균이 높은 Sungjuk 객체의 메소드위치주소값을 맨 앞에 배열변수로 옮기기
+			//--------------------------------------
+			document.write("<평균 높은 Sungjuk 객체를 맨앞 배열변수로 이동한 결과> <br><br>");
+			for (var i =0; i< sungjuk_arr.length-1; i++){
+				for (var j =i+1; j< sungjuk_arr.length; j++){
+				//i번째 배열변수 안의 Sungjuk객체의 getAvg() 메소드 호출로 평균 얻어 avg1변수에 저장
+					var avg1 = sungjuk_arr[i].getAvg();
+				//j번째 배열변수 안의 Sungjuk객체의 getAvg() 메소드 호출로 평균 얻어 avg2변수에 저장
+					var avg2 = sungjuk_arr[j].getAvg();
+					//만약 i번째 배열 변수 안의 Sungjuk 객체의 평균보다 j번째 배열변수 안의 Sungjuk객체의 평균이
+					//크면 배열변수안의 Sungjuk객체의 메소드 위치 주소값을 바꾸기
+					if ( avg1 < avg2 ){
+						var tmp = sungjuk_arr[i];
+						sungjuk_arr[i] = sungjuk_arr[j];
+						sungjuk_arr[j] = tmp;
+					}
+				}
+			}
+			for (var i =0; i< sungjuk_arr.length; i++){
+				document.write("학번 : " + sungjuk_arr[i].getS_no() + "<br>");
+				document.write("총점 : " + sungjuk_arr[i].getTot() + "<br>");
+				document.write("평균 : " + sungjuk_arr[i].getAvg() + "<br><br>");
+			}
+			document.write("<hr>");
+
+		</script>
+	</body>
+</html>

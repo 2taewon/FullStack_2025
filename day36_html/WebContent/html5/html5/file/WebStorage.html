@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>웹 스토리지 테스트</title>
+</head>
+<body>
+<textarea id="ta"></textarea>
+
+<script type="text/javascript">
+	try{
+		var area = document.querySelector('#ta');
+		//편집 전 컨텐츠 변경
+		if ( !area.value ) {
+			area.value = window.localStorage.getItem('value');
+		}
+		
+		//컨텐츠 로컬 저장
+		area.addEventListener('keyup', function(){
+			window.localStorage.setItem('value', area.value);
+			window.localStorage.setItem('timestamp', (new Date()).getTime() );
+		}, false );
+		
+	}catch(ex) {
+		alert("현재 브라우저는 로컬 웹스토리지를 지원하지 않습니다.");
+	}
+</script>
+
+<input type="text"  >
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex20_jquery</title>
+
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<input id = "inputdemo">
+<input type = "button">
+<input type = "text" placeholder ="입력">
+
+<div class = "welcome"></div>
+<div class = "welcome"></div> <hr>
+
+<div id = "demo">
+	<div class = "inner"> Create jQuery Test</div>
+</div> <hr>
+<div id = "name">이 부분에 클릭 이벤트가 발생하면 자신이름 출력</div>
+<script type = "text/javascript">
+	$('h4').css('color', 'aqua');
+	//#demo.inner 글자에 언더라인 
+	//$('#demo.inner').css('text-decoration', 'underline');
+	//기울기 
+	//$('#demo.inner').css('transform', 'rotate(45deg)');
+	$('#demo.inner').css('opacity','0.5'); //px 생략가능
+	//아래쪽에 5px 두께 실선 red 
+	$('#demo.inner').css({
+	'border-bottom' : '5px solid red',
+	'text-decoration' : 'underline',
+	'opacity' : '0.3',
+	'transform' : 'rotate(15deg)'});
+	//$('선택자').on('이벤트 종료', 할일)
+	$('#demo.inner').on('mouseover', function(){
+		$('.inner').css('background', 'green');
+	});
+	$('#demo#name').on('mouseout', function(){
+		$('.inner').css('background','white').html('hi');
+	});
+	
+	// 여러 선택자에 이벤트 추가
+	$('#demo, h4, div').mouseover(function(){
+		$(this).css('background', 'yellow').html('MSA Th2!');
+	});
+</script>
+</body>
+</html>

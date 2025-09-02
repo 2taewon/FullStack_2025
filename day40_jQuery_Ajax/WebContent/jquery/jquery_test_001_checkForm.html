@@ -1,0 +1,309 @@
+<!-- 
+	=> JQuery를 사용하여 [입력양식]에 입력된 데이터의 [유효성체크]를 해보자.
+	=> 자바스크립트로 [유효성체크]하는 방식과 비교하여 둘 다 기억한다.
+-->
+
+<html>
+	<meta charset="UTF-8">
+	<head>
+	<!-- ------------------------------------------------------------------->
+	<!-- JQuery 라이브러리 수입하기 -->
+	<!-- JQuery 라이브러리 수입되야 JQuery 객체 생성이 가능하고 JQuery 객체의 메소드 호출도 
+	가능하다  -->
+	<!-- ------------------------------------------------------------------->
+	<script src="jquery-1.11.0.min.js"></script>
+	<script>
+		//*************************************
+		// 저장버튼을 누르면 호출되는 함수
+		// 입력양식들의 유효성 체크를 한후 모두 유효성에 합당하면
+		// 서버로 전송하는 기능을 가지고 있다.
+		//*************************************
+		function checkForm( ){
+			//-------------------------------------------
+			// 아이디 값 유효성 체크하기
+			//-------------------------------------------
+			// <디자이너 차원 설명>class="uid"인 태그의 value 속성값을 리턴해 uid 변수에 저장
+			// <개발자 차원 설명>class="uid"를 가진 태그를 관리하는 JQuery 객체를 생성하고
+			//                      JQuery 객체의 메소드 val( )을 호출하여
+			//                      value 속성값을 리턴해 uid변수에 저장
+			var uid = $("[name='regForm'] .uid").val( );
+			//var uid = $("[name='regForm'] [name='uid']").val( );
+
+			// 아이디 패턴의 올바름 여부를 RegExp객체의 test 메소드를 사용하여 얻음.
+			//첮글자는 여소문자, 두번쨰부터는 영소 or 숫자 or _로 총 6~15개 나오는
+			// 패턴을 관리하는 RegExp 객체 생성
+			var regExp = new RegExp( /^[a-z][a-z0-9_]{6,14}$/ );
+			//RegExp 객체의 test 메소드 호출로 패턴의 옳고 그름을 저장.
+			var flag = regExp.test(uid);
+			// uid 변수 안의 데이터가 RegExp객체가 소유한 패턴을 위반했으면
+			// 함수 중단 즉 return 이후 코딩 실행 중단
+			if ( flag == false ){
+				alert("[아이디] 입력 규칙에 맞지 않음. 재입력 바람!\n<1> 영소문자 또는 숫자 또는 언더바(_)로 구성되야함.\n<2> 글자수는 7~15로 구성되어야함\n<3> 첫글자는 영문이어야함.\n");
+				$(".uid").val("");
+				$(".uid").focus();
+				return;
+			}
+			//-------------------------------------------
+			// 암호 값 유효성 체크하기
+			//-------------------------------------------
+			// <디자이너 차원 설명>class="pwd"인 태그의 value 속성값을 리턴해 pwd 변수에 저장
+			// <개발자 차원 설명>class="pwd"를 가진 태그를 관리하는 JQuery 객체를 생성하고
+			//                      JQuery 객체의 메소드 val( )을 호출하여
+			//                      value 속성값을 리턴해 pwd 변수에 저장
+			var pwd = $("[name='regForm'] .pwd").val( );
+			//var pwd = $("[name='regForm'] [name='pwd']").val( );
+			
+			// 패턴을 관리하는 RegExp 객체 생성
+			var regExp = new RegExp( /^[a-z0-9]{8,16}$/ );
+			//RegExp 객체의 test 메소드 호출로 패턴의 옳고 그름을 저장.
+			var flag = regExp.test(pwd);
+			// pwd 변수 안의 데이터가 RegExp객체가 소유한 패턴을 위반했으면
+			// 함수 중단 즉 return 이후 코딩 실행 중단
+			if ( flag == false ){
+				alert("[암호] 입력 규칙에 맞지 않음. 재입력 바람!\n<1> 영소문자 또는 숫자로 구성되야함.\n<2> 글자수는 8~16로 구성되어야함");
+				$(".pwd").val("");
+				$(".pwd").focus();
+				return;
+			}
+			//-------------------------------------------
+			// 핸드폰 번호 값 유효성 체크하기
+			//-------------------------------------------
+			// <디자이너 차원 설명>class="phone"인 태그의 value 속성값을 리턴해 phone 변수에 저장
+			// <개발자 차원 설명>class="phone"를 가진 태그를 관리하는 JQuery 객체를 생성하고
+			//                      JQuery 객체의 메소드 val( )을 호출하여
+			//                      value 속성값을 리턴해 phone변수에 저장
+			var phone = $("[name='regForm'] .phone").val( );
+			//var phone = $("[name='regForm'] [name='phone']").val( );
+			
+			// 패턴을 관리하는 RegExp 객체 생성
+			var regExp = new RegExp( /^01([0|1|6|7|8|9])-[0-9]{3,4}-[0-9]{4}$/ );
+			//RegExp 객체의 test 메소드 호출로 패턴의 옳고 그름을 저장.
+			var flag = regExp.test(phone);
+			// phone 변수 안의 데이터가 RegExp객체가 소유한 패턴을 위반했으면
+			// 함수 중단 즉 return 이후 코딩 실행 중단
+			if ( flag == false ){
+				alert("[핸드폰번호] 입력 규칙에 맞지 않음. 재입력 바람!\n<1>숫자로 구성되야함.\n<2> [숫자3개]-[숫자3~4개]-[숫자4개]로 구성되어야함");
+				$(".phone").val("");
+				$(".phone").focus();
+				return;
+			}
+			//-------------------------------------------
+			// 스킬 유효성 체크하기
+			//-------------------------------------------
+			// class="skill"를 가진 태그 중에 체크된 놈을 관리하는 JQuery 객체 생성하고 length라는 속성변수를 호출하여
+			//JQuery 객체가 관리하는 태그의 개수를 skillcnt에 저장하기
+			var skillCnt = $(".skill:checked").length;
+			//var skillCnt = $(".skill:checked").size(); 도 가능
+			//var skillCnt = $("[name='regForm']").find(":checked").length; 도 가능
+			//var skillCnt = $(".skill").filter(":checked").length;도 가능
+			//**filter 왼쪽 점 이 가져오는것은 객체의 메위주턴를 얻고 filter를 사용해서 checked를 관리하는 JQuery객체를 다시 리턴
+			
+
+			//만약 체크된 놈의 개수가 0개면 경고하고 함수 중단
+			if (skillCnt==0){
+				alert("스킬은 1개 이상 선택 요망");
+				return;
+			}
+			/*
+					//-------------------------------------------
+					// 자바스크립트의 DOM객체를 사용한 스킬 유효성 체크하기
+					//-------------------------------------------
+					var skillCnt=0;
+					// i번째 스킬이 체크되어 있으면 변수 skill_cnt 1 업데이트하기
+					for (i=0; i<document.regForm.skill.length; i++ ){
+						if(document.regForm.skill[i].checked == true){//true 생략가능
+							skillCnt++;
+						}
+					}
+					//skill_cnt가 0이면 (=아무것도 체크되어 있지 않으면) 경고하고 함수 중단
+					if (skillCnt == 0){
+						alert( "소유스킬은 1개이상 선택요망!" );
+						return;
+					}
+			*/
+
+			//-------------------------------------------
+			// 학력 유효성 체크하기
+			//-------------------------------------------
+			// class="school"를 가진 태그 중에 체크된 놈을 관리하는 JQuery 객체 생성하고 length라는 속성변수를 호출하여
+			// JQuery 객체가 관리하는 태그의 개수를 skillcnt에 저장하기
+			var schoolCnt = $(".school:checked").length;
+			// var schoolCnt = $(".school:checked").size();// 도 가능
+			// var schoolCnt = $("[name='regForm']").find(":checked").length;// 도 가능
+			// var schoolCnt = $(".school").filter(":checked").length;// 도 가능
+			// **filter 왼쪽 점 이 가져오는것은 객체의 메위주턴를 얻고 filter를 사용해서 checked를 관리하는 JQuery객체를 다시 리턴
+			
+
+			//만약 체크된 놈의 개수가 0개면 경고하고 함수 중단
+			if (schoolCnt==0){
+				alert("학력 선택 요망");
+				return;
+			}
+
+			//-------------------------------------------
+			// 종교 유효성 체크하기(필수선택)
+			//-------------------------------------------
+			// class="religion"를 가진 태그를 관리하는 JQuery 객체를 생성하고 val() 라는 메소드를 호출하여
+			// value 값을 가져와 변수 religion에 저장하기
+			var religion = $(".religion").val( );
+			// 만약 종교가 선택되지 않았으면 경고하고 함수 중단
+			if (religion==0){
+				alert("종교 선택 요망!");
+				return;
+			}
+			
+			//-------------------------------------------
+			// confirm 상자 띄우고 서버로 보낼지 말지 마지막으로 물어본다
+			//-------------------------------------------
+			if ( confirm("정말 전송 할까요?") == true){
+				// action="서버url주소"의 서버 url주소로 폼태그 안의 모든 데이터 전송
+				document.regForm.submit( );
+			}
+			/*
+			if (confirm("정말 전송 할까요?") == false){ return; }
+			// action="서버url주소"의 서버 url주소로 폼태그 안의 모든 데이터 전송
+			document.regForm.submit( );
+			*/
+
+		}
+		//========================================
+		// checkbox에서 체크된 놈은 풀고, 체크안된놈은 체크하는 함수
+		//========================================
+		function reverseChecked( classV ){
+			// 체크 된 놈을 관리하는 JQuery객체의 매위주값을 변수 obj1에 저장
+			var obj1 = $("."+classV).filter(":checked");
+			// 체크 안된 놈을 관리하는 JQuery객체의 매위주값을 변수 obj1에 저장
+			var obj2 = $("."+classV+":not(:checked)");
+			//obj1에 저장된 JQuery 객체가 관리하는 놈의 체크를 풀어 줌
+			obj1.prop( "checked", false );
+			//obj2에 저장된 JQuery 객체가 관리하는 놈의 체크를 넣어 줌
+			obj2.prop( "checked", true );
+
+		//------------------------------------------------
+		// 다음 처럼하면 안됨
+		//------------------------------------------------
+			//$("."+classV).filter(":checked").prop( "checked", false );    <1>
+			//$("."+classV).filter(":not(:checked)").prop( "checked", true );    <2>
+			// 코드 <1>에서 체크를 풀어준 놈이 코드 <2>에서도 선택되므로 안됨
+		//------------------------------------------------
+		// 자바스크립트를 사용하면 다음과 같다
+		//------------------------------------------------
+		/*
+			var obj=eval("document.regForm."+classV);
+			for(var i=0; i<obj.length; i++){
+				if(obj[i].checked==true){
+					obj[i].check=false;
+				}else{
+					obj[i].check=true;
+				}
+			}
+		*/
+		}
+		//========================================
+		// 매개변수로 들어온 클래스 속성값을 가진 태그의 입력데이터를 없애거나 체크된놈의 체크를 취소해버리는 함수선언
+		//========================================
+		function setEmpty( classV ){
+		// 매개변수로 들어온 클래스 속성값을 가진 태그를 관리하는  을
+		//Query객체의 매위주 값을 변수 obj에 저장
+			var obj = $("." + classV);
+
+			// 만약에 JQuery 객체가 관리하는 태그가 checkbox 이거나 radio 면 체크를 풀기
+			if (obj.filter("[type=checkbox]").length>0 || obj.filter("[type=radio]").length>0){
+				 obj.filter(":checked").prop("checked", false);
+			}
+			// 만약에 Jquery 객체가 관리하는 태그가 checkbox, radio가 아니면 value 값 비우기
+			else{
+				obj.val("");
+			}
+/*
+			// <방법1>-----------------------------------------------
+			// 만약에 JQuery 객체가 관리하는 태그가 checkbox 이거나 radio 면 체크를 풀기
+			if (obj.is("[type=checkbox]") || obj.is("[type=radio]")){
+				 obj.filter(":checked").prop("checked", false);
+			}
+			// 만약에 Jquery 객체가 관리하는 태그가 checkbox, radio가 아니면 value 값 비우기
+			else{
+				obj.val("");
+			}
+			// <방법2>-----------------------------------------------
+			obj.filter(":checked").prop("checked", false);
+			obj.filter("select, textarea, :text, :password").val("");
+			// obj.filter("select, textarea, [type=text], [type=password]").val("");
+*/
+		}
+		//========================================
+		// 폼태그 안의 모든 입력양식의 입력데이터를 없애거나 선택 데이터를 취소해버리는 함수
+		// 즉 초기화 함수
+		//========================================
+		function setEmptyAll( ){
+
+			// form 후손 중 체크 된 놈 츠케 풀기
+			$("form").find(":checked").attr("checked", false);
+			// form 후손 중 checkbox, radio 가 아닌 기타 입력 양식 value값 지우기
+			$("form").find("select, textarea, :text, :password").val("");
+
+			//<방법1>--------------------------------------------------------------------
+		// document.regForm.reset();
+		
+		}
+
+	</script>
+	</head>
+	
+	<body><center>
+		<form name= "regForm" action="">
+			[회원가입]
+			<!-- -------------------------------------------------------------->
+			<table border=1 cellpadding=5>
+			<!-- -------------------------------------------------------------->
+				<tr>
+					<th>아이디
+					<td><input type="text" class="uid" name="uid" value="">
+				</tr>
+				<tr>
+					<th>암호
+					<td><input type="password" class="pwd" name="pwd">
+				</tr>
+				<tr>
+					<th>전화
+					<td>
+						<input type="text" class="phone" name="phone"> (번호-번호-번호)
+						<input type="button" value="비움" onClick="setEmpty('phone');">
+				</tr>
+				<tr>
+					<th>소유스킬
+					<td>
+						<input type="checkbox" name="skill" value="Java" class="skill">Java
+						<input type="checkbox" name="skill" value="ASP" class="skill">ASP
+						<input type="checkbox" name="skill" value="PHP" class="skill">PHP
+						<input type="checkbox" name="skill" value="Android" class="skill">Android&nbsp;
+						<input type="button" value="반전" onClick="reverseChecked('skill');">
+						<input type="button" value="비움" onClick="setEmpty('skill');">
+				</tr>
+				<tr>
+					<th>학력
+					<td>
+						<input type="radio" name="school" class="school" value="1">중졸
+						<input type="radio" name="school" class="school" value="2">고졸
+						<input type="radio" name="school" class="school" value="3">대졸
+				</tr>
+				<tr>
+					<th>종교
+					<td>
+						<select name="religion" class="religion">
+							<option value=""></option>
+							<option value="불교">불교</option>
+							<option value="기독교">기독교</option>
+							<option value="천주교">천주교</option>
+							<option value="이슬람교">이슬람교</option>
+							<option value="무교">무교</option>
+						</select>
+				</tr>
+			</table><br>
+
+			<input type="button" value="전송" onClick="checkForm( );">
+			<input type="button" value="비움" onClick="setEmptyAll( );">
+
+			</form>
+	</body>
+</html>

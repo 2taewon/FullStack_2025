@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Canvas Line</title>
+<script>		
+	
+window.onload = function(){
+	// Canvas DOM 객체 생성
+	var canvas = document.getElementById('diagonal');
+	//그리기 컨텍스트 생성
+	var context = canvas.getContext('2d');
+
+	// 선그리기 시작
+	context.beginPath();
+	// 시작좌표
+	context.moveTo(70, 140);
+	// 대각석 긋기
+	context.lineTo(140, 70);
+
+	// 선을 출력 
+	context.stroke();
+};
+	</script>
+</head>
+<body>
+	<canvas id="diagonal" width="200" height="200"></canvas>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

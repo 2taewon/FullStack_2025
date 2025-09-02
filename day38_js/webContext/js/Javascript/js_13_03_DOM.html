@@ -1,0 +1,217 @@
+<!-- 자바스크립트로 HTML 입력양식에 입력된(선택된) 데이터의 유효성체크를 해본다
+		유효성 체크란 DB에 저장될 수 있는 데이터인가 아닌가를 체크하는일-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script src="common.js"> </script>
+		
+		<script>
+		//**********************************************
+		// 저장 버튼을 누르면 호출되는 함수
+		// 입력양식들의 유효성 체크를 한 후 모두 유효성에 합당하면
+		// 서버로 전송하는 기능을 가지고 있다.
+		//**********************************************
+		function checkForm( ){
+			//----------------------------------------------------------------------
+			// name=memberRegForm 을 가진 폼태그 내부의 데이터를 보낼 웹서버의 주소 설정
+			// form 객체의 action 이란 속성변수안에 서버의 URL 주소 저장
+			// form 태그 내부의 입력양식의 값들이 이 서버의 URL 주소로 전송된다.
+			//----------------------------------------------------------------------
+			document.memberRegForm.action="http://www.naver.com";
+			//----------------------------------------------------------------------
+			// name=memberRegForm 을 가진 폼태그 내부의 입력양식을 데이터를 서버로 보낼때 보내는 방법을 설정
+			// get 방식이면 모든 데이터가 URL 뒤에 붙어서 가고
+			// post 방식이면 URL 뒤에 붙지 않고 보낸다.
+			//----------------------------------------------------------------------
+			document.memberRegForm.method="post";
+
+			//----------------------------------------------------------------------
+			// 아이디 값 유효성 체크하기
+			//----------------------------------------------------------------------
+			var uid = document.memberRegForm.uid.value;
+			if ( is_id( uid ) == false ){                //         오른쪽도 가능 if ( !is_id( uid ) ){
+				// 입력된 아이디 비우기
+				document.memberRegForm.uid.value="";
+				// 아이디 입력란에 촛점 들여놓기. 즉 커서 들여 놓기
+				document.memberRegForm.uid.focus();
+				return;
+			}
+			/*
+			if ( is_pattern(uid, /^[a-z][a-z0-9_]{6,14}$/) == false ){
+				alert("[아이디] 입력 규칙에 맞지 않음. 재입력 바람!\n<1> 영소문자 또는 숫자 또는 언더바(_)로 구성되야함.\n<2> 글자수는 7~15로 구성되어야함\n<3> 첫글자는 영문이어야함.\n");
+				// 입력된 아이디 비우기
+				document.memberRegForm.uid.value="";
+				// 아이디 입력란에 촛점 들여놓기. 즉 커서 들여 놓기
+				document.memberRegForm.uid.focus();
+				return;
+			}
+			*/
+			//----------------------------------------------------------------------
+			// 암호 값 유효성 체크하기
+			//----------------------------------------------------------------------
+			var pwd = document.memberRegForm.pwd.value;
+			if ( is_pwd( pwd ) == false ){                //오른쪽도 가능 if ( !is_pwd( pwd ) ){
+				// 입력된 아이디 비우기
+				document.memberRegForm.pwd.value="";
+				// 아이디 입력란에 촛점 들여놓기. 즉 커서 들여 놓기
+				document.memberRegForm.pwd.focus();
+				return;
+			}
+			//----------------------------------------------------------------------
+			// 스킬 유효성 체크, 1개 이상 선택하기
+			//----------------------------------------------------------------------
+			var skill_obj = document.memberRegForm.skill;
+			if (check_cnt( skill_obj ) < 1 ){
+				alert( "소유스킬은 1개이상 선택요망!" );
+				return;
+			}
+			//----------------------------------------------------------------------
+			// 학력 유효성 체크
+			//----------------------------------------------------------------------
+			var school_obj = document.memberRegForm.school;
+			if ( check_cnt( school_obj ) < 1 ){
+				alert( "최종학력 선택요망!" );
+				return;
+			}
+			//----------------------------------------------------------------------
+			// 거주지 유효성 체크
+			//----------------------------------------------------------------------
+			var addr = document.memberRegForm.addr.value;
+			if ( addr == "" ){ // 오른쪽으로 대체가능    if( is_empty( addr ) ){
+				alert( "거주지 입력요망" );
+				return;
+			}
+			//----------------------------------------------------------------------
+			// 생일 유효성 체크
+			//----------------------------------------------------------------------
+			/*
+			var birth_year = document.memberRegForm.birth_year.value;
+			var birth_month = document.memberRegForm.birth_month.value;
+			var birth_date = document.memberRegForm.birth_date.value;
+			if ( is_birth(birth_year, birth_month,birth_date ) == false ){
+				alert("생일의 년, 월, 일이 모두 입력 안됐거나 존재하지 않는 생일입니다.");
+				return;
+			}*/
+			var birth_year_obj = document.memberRegForm.birth_year;
+			var birth_month_obj = document.memberRegForm.birth_month;
+			var birth_date_obj = document.memberRegForm.birth_date;
+			if ( is_birth2(birth_year_obj, birth_month_obj, birth_date_obj ) == false ){
+				alert("생일의 년, 월, 일이 모두 입력 안됐거나 존재하지 않는 생일입니다.");
+				return;
+			}
+
+
+			//----------------------------------------------------------------------
+			// 숙지사항 체크가 안되 있으면 경고하고 함수중단
+			//----------------------------------------------------------------------
+			var is_confirm_obj = document.memberRegForm.is_confirm;
+			if( check_cnt( is_confirm_obj ) < 1 ){
+				alert( "숙지사항은 필수 체크입니다!" );
+				return;
+			}
+
+		}
+		
+		</script>
+	</head>
+	
+	<body onload="document.memberRegForm.uid.focus();"><center>
+		<form name="memberRegForm" enctype="multipart/form-data">
+			<!-- -------------------------------------------------------------->
+			<table border=1 cellpadding=10 cellspacing=5>
+			<!-- -------------------------------------------------------------->
+				<tr>
+					<th>아이디
+					<td><input type="text" name="uid" size=8>
+				</tr>
+				<tr>
+					<th>암호
+					<td><input type="password" name="pwd" size=8>
+				</tr>
+				<tr>
+					<th>소유스킬
+					<td>
+						<input type="checkbox" name="skill" value="Java">Java
+						<input type="checkbox" name="skill" value="JSP">JSP
+						<input type="checkbox" name="skill" value="Spring">Spring
+						<input type="checkbox" name="skill" value="Oracle">Oracle
+				</tr>
+				<tr>
+					<th>최종학력
+					<td>
+						<input type="radio" name="school" value="중졸">중졸
+						<input type="radio" name="school" value="고졸">고졸
+						<input type="radio" name="school" value="전문대졸">전문대졸
+						<input type="radio" name="school" value="일반대졸">일반대졸
+				</tr>
+				
+				<tr>
+					<th>거주지역
+					<td>
+						<select name="addr">
+							<option value="">선택
+							<option value="서울">서울
+							<option value="경기">경기
+							<option value="인천">인천
+							<option value="전라도">전라도
+							<option value="경상도">경상도
+							<option value="부산">부산
+							<option value="충청도">충청도
+							<option value="제주도">제주도
+							<option value="기타">기타
+						</select>
+				</tr>
+				<tr>
+					<th>생일
+					<td>
+						<select name="birth_year"">
+							<option value="">
+							<script>
+								for ( var i=2000; i<=new Date().getFullYear()+1; i++ ){
+									document.write( "<option value=" + i + ">" + i );
+								}
+							</script>
+						</select>년
+						<select name="birth_month">
+							<option value="">
+							<script>
+								for ( var i=1; i<=12; i++ ){
+									var m = ( i<10 )?"0"+i:i;
+									document.write( "<option value=" + m + ">" + m );
+								}
+							</script>
+						</select>월
+						<select name="birth_date">
+							<option value="">
+							<script>
+								for ( var i=1; i<=31; i++ ){
+									var m = ( i<10 )?"0"+i:i;
+									document.write( "<option value=" + m + ">" + m );
+								}
+							</script>
+						</select>일
+				</tr>
+				<tr>
+					<th>주민번호
+					<td>
+						<input type="text" name="jumin_num1" maxlength=6> - 
+						<input type="text" name="jumin_num2" maxlength=7>
+				</tr>
+				<tr>
+					<th>사진
+					<td>
+						<input type="file" name="pic">
+				</tr>
+				<tr>
+					<th>숙지사항
+					<td>
+						입력하신 개인 정보는 회사 소유입니다.
+						<input type="checkbox" name="is_confirm" value="확인">확인
+				</tr>
+			<!-------------------------------------->
+			</table>
+			<!-------------------------------------->
+			<input type="button" value="   저장   " onClick="checkForm( )">
+		</form>
+	</body>
+</html>

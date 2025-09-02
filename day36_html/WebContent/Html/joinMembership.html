@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+header {
+	margin : 0 auto;
+	width : 400px;
+	font-size : 30px;
+	text-align : center;
+}
+table{
+	height : 40px;
+	background-color : #cce0ff ;
+	border : 2px solid;
+	margin : 0 auto;
+}
+tr {
+	height : 40px;
+	border : 1px solid;
+}
+th{	
+	border : 1px solid;
+	text-align : center;
+}
+td {
+	border : 1px solid;
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+<header><h2>회원 정보 입력</h2> </header> <hr><br>
+<table>
+<form action="../jsp/result.jsp" method ="post">
+	<tr><th><span style="color : red">*</span>I D</th><td><input type ="text" name = "id" id = "id" required ="required" placeholder ="ID입력"></td></tr>
+	<tr><th><span style="color : red">*</span>Password</th><td><input type ="password" name = "pwd" id = "pwd" required ="required" placeholder ="Password 입력"></td></tr>
+	<tr><th><span style="color : red">*</span>Password 확인</th><td><input type = "password" name = "pwd_c" id = "pwd_c" required ="required" placeholder = "password 재입력"></td></tr>
+	<tr><th><span style="color : red">*</span>이 름</th><td><input type = "text" name = "name" id = "name" required = "required" placeholder ="이름 입력"></td></tr>
+	<tr><th><span style="color : red">*</span>전화번호</th><td>
+	<select><option>010</option><option>016</option><option>011</option></select> - <input type = "text" name = "tel_f" id = "tel" required = "required" style = "width : 40px"> - <input type = "text" name = "tel_s" id = "tel" required = "required" style = "width : 40px"></td></tr>
+	<tr><th>직 업</th><td><select>
+		<option>직업 선택</option>
+		<option>Frontend</option>
+		<option>Backend</option>
+	</select></td></tr> 
+	<tr><th>성 별</th><td><input type = "radio" checked>남자 &nbsp;<input type = "radio">여자</td></tr>
+	<tr><th>취 미</th><td><input type = "checkbox">독서 &nbsp; 
+		<input type = "checkbox">수영 &nbsp; 
+		<input type = "checkbox">게임 &nbsp;
+		<input type = "checkbox">영화 감상 &nbsp;
+		<input type = "checkbox">음악 듣기 &nbsp;</td></tr>
+	<tr><th>자기소개</th><td><textarea rows="10" cols="53"></textarea></td></tr>
+	<tr><td colspan = "2" style = "text-align : center;"><input type = "submit" value ="등록하기"> &nbsp; <input type ="reset" value ="취소하기"></td></tr>
+	
+</table>
+</form>
+</body>
+</html>

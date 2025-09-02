@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html><head>
+<title>Ajax Form Data</title>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$('#btn1').click(function() {
+			var n = $('#name').val();
+			var on = $('#orderNum').val();
+			
+			$.ajax({
+				url : 'ajaxData.jsp',
+				data : {name :n, orderNum : on },
+				
+				success : function(data, status) {
+					alert(data + " : " + status);
+					$('#result').html(data);
+				},
+				error : function(e) {
+					alert(e);
+				}
+			});
+		});
+	});
+</script>
+
+</head>
+<body>
+	<div data-role="page" id="page">
+		<div data-role="header">
+			<h1>Ajax Form Data</h1>
+		</div>
+		
+		<div data-role="content">
+			<form action="" method="post">
+				<div data-role="fieldcontain">
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name">
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="orderNum">orderNum</label>
+					<input type="text" name="orderNum" id="orderNum">
+				</div>
+				
+				<p style="text-align: right;" data-role="navbar">
+					<a href="#"  data-icon="arrow-u" class="ui-btn" id="btn1">주문확인</a>
+				</p>
+			</form> 
+			
+			<div data-role="fieldcontain">
+				<label>결과 : </label>
+				<textarea rows="5" cols="10" id="result"  readonly="readonly"></textarea>
+			</div>
+		</div>
+		
+		<div data-role="footer">
+			<h3>(주)KOSTA 주식회사</h3>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+

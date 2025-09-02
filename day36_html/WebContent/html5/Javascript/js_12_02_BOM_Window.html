@@ -1,0 +1,63 @@
+<!-- 
+	=> Date 객체, Window 객체의 메소드를 사용하여 웹하면에 흘러가는 디지털 시계를 출력하자.
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+		//------------------------------------------------------
+		// 1초마다 웹하면에 플러가는 디지털 시계를 출력하는 함수 선언
+		//------------------------------------------------------
+			function showTime( ){
+				// 현재 날짜를 관리하는 Date 객체 생성
+				var today = new Date( );
+				// Date 객체에서 날짜관련 각 데이터를 꺼내어 저장하는 변수선언
+				var amPm = "오후";
+				var year = today.getFullYear( );
+				var month = today.getMonth( ) + 1;
+				var date = today.getDate( );
+				var week = today.getDay( );
+					week = [ "일", "월", "화", "수", "목", "금", "토" ][ week ];
+				var hour = today.getHours( );
+				var minute = today.getMinutes( );
+				var second = today.getSeconds( );
+				//날짜관련 각 데이터가 10미만 이면 앞에 0붙이기
+				//오전, 오후 여부 판단해서 저장하기
+				if(month<10){
+					month = "0"+ month;
+				}
+				if (date<10){
+					date = "0" + date;
+				}
+				if (hour<12)	{
+					amPm = "오전";
+				}
+				if (hour>12){
+					hour = hour - 12;
+				}
+				if (hour<10){
+					hour = "0" + hour;
+				}
+				if (minute<10){
+					minute = "0" + minute;
+				}
+				if (second<10){
+					second = "0" + second;
+				}
+				// id="nowTime"가 있는 태그영역 내부에 시간 문자열 삽입.
+				document.getElementById("nowTime").innerHTML=
+				year + "년 " + month + "월 " + date + "일 " + " (" + week + ") " + 
+				amPm + " " + hour + "시 " + minute + "분 " + second + "초";
+			}
+
+			function startTime( ){
+				window.setInterval("showTime()",1000);
+			}
+			
+		</script>
+	</head>
+	
+	<body onLoad="startTime( )"><center>
+		<div id="nowTime"></div>
+	</body>
+</html>

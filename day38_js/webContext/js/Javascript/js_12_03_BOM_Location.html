@@ -1,0 +1,32 @@
+<!--
+	=> Location의 메소드를 사용하여 페이지 이동을 해보자
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+			function go( portal ){
+				if ( portal == '네이버' ){
+					location.replace("http://www.naver.com");
+				}
+				if ( portal == '구글' ){
+					location.replace("http://www.google.com");
+				}
+				if ( portal == '다음' ){
+					location.replace("http://www.daum.net");
+				}
+			}
+		</script>
+	</head>
+	
+	<body><center>
+		<script language = "JavaScript">
+			document.write("현재 페이지는 " + location.href + "<hr>");
+		</script>
+		<a href="" onMouseout="javascript:go('네이버');">네이버</a><br><br>
+
+		<a href="javascript:go('네이버');">네이버</a><br><br>
+		<a href="javascript:go('구글');">구글</a><br><br>
+		<a href="javascript:go('다음');">다음</a><br><br>
+	</body>
+</html>

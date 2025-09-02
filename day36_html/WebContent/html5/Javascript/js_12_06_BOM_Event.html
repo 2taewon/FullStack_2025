@@ -1,0 +1,54 @@
+<!-- 
+	=> 웹 화면에서 발생하는 각조 이벤트 정보를 관리하는 Event 객체를 이용하여 이벤트 발생시 원하는 행동을 취한다.
+-->
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+			function msg1( ){
+				alert("방문환영");
+			}
+			function msg2( ){
+				alert("굿바이");
+			}
+			function show1( ){
+				// 이벤트가 발생한 위치의 X 좌표를 구해 변수에 저장하기
+				var x = event.screenX;
+				// 이벤트가 발생한 위치의 Y 좌표를 구해 변수에 저장하기
+				var y = event.screenY;
+				// name="info1"을 가진 입력양식의 value속성에 클릭이란 이벤트가 발생한 위치의 X좌표, Y 좌표를 삽입
+				document.myForm.info1.value = "X좌표 : " + x + " , " + "Y좌표 : " + y;
+			}
+			function show2( ){
+			// name="info2"을 가진 양식의 value속성에 누른 마우스 버튼의 고유번호 삽입
+				document.myForm.info2.value = event.button;
+				if (event.button == 2){
+					alert("카피금지");
+				}
+			}
+			function show3( ){
+				document.myForm.info3.value = event.keyCode;
+			}
+		</script>
+	</head>
+	
+	<body onLoad="msg1( );"
+				onUnLoad="msg2( );"
+				onClick="show1( );"
+				onMousedown="show2( )"
+				onKeydown="show3( )">
+		<form name="myForm">
+			<table border=0 cellpadding=7 cellspacing=0>
+				<tr>
+					<td>마우스 클릭 위치 : 
+					<td><input type="text" name="info1" size=30><br>
+				<tr>
+					<td>클릭한 마우스 고유번호 : 
+					<td><input type="text" name="info2" size=30><br>
+				<tr>
+					<td>누른 키보드 번호 : 
+					<td><input type="text" name="info3" size=30><br>
+			</table>
+		</form>
+	</body>
+</html>

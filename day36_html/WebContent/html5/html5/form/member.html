@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>회원가입</title>
+<style>
+<!--
+html {
+	font-family: Verdana;
+	font-size: 0.95em;
+}
+
+h1 {
+	color: #5999DE;
+}
+
+form {
+	font: 100% Lucinda Grande, Sans-serif;
+	margin: 0;
+	padding: 0;
+	min-width: 500px;
+	max-width: 600px;
+	width: 560px;
+	border: 1px solid #ccc;
+}
+
+}
+.entry {
+	background: red;
+}
+
+label {
+	color: #666666;
+	float: left;
+	width: 130px;
+	padding: 0;
+	text-align: right;
+}
+
+input, textarea {
+	margin-left: 10px;
+}
+
+.button {
+	padding-left: 140px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+input:required {
+	background: #999;
+	color: #fff;
+}
+-->
+</style>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<p>그레이는 필수 입력</p>
+	<form method="post" action="member.jsp" name="f">
+
+		<div class="entry">
+			<label>아이디: </label><input name="id" type="text" maxlength="15"
+				required autofocus> 최대 15자
+		</div>
+		<!-- entry end -->
+
+		<div class="entry">
+			<label>비밀번호 : </label><input name="pwd" type="password">
+		</div>
+
+		<div class="entry">
+			<label>이름 : </label><input name="name" type="text">
+		</div>
+
+		<div class="entry">
+			<label>나이: </label><input name="age" type="number" min="18" max="25"><br />
+		</div>
+
+		<div class="entry">
+			<label>이메일: </label><input name="email" type="email" required><br />
+		</div>
+
+		<div class="entry">
+			<label>홈페이지: </label><input name="url" type="uri"  list="mylist"><br />
+		</div>
+		<datalist id="mylist">
+			`
+			<option label="google" value="http://google.com">
+			<option label="yahoo" value="http://yahoo.com">
+			<option label="personal" value="http://shwetankdixit.com">
+		</datalist>
+
+		<div class="entry">
+			<label>생일: </label><input name="dob" type="date"><br />
+		</div>
+		<!-- entry end -->
+
+		<div class="entry">
+			<label>만족도 </label><input id="slider" name="a" type="range" mix="1"
+				max="10" value="5"> </input>
+			<output name="result" value="5" onforminput="value=a.value">0</output>
+			<br />
+		</div>
+		<!-- entry end -->
+		<div class="button">
+			<button type=submit>Submit</button>
+		</div>
+	</form>
+</body>
+</html>

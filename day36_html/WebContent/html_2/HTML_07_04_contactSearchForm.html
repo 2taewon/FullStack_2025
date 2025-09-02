@@ -1,0 +1,267 @@
+<html>
+	<meta charset="UTF-8">
+		
+	<style>
+
+		/* ----------------------------------------------------------------------
+			
+			body, form, table, td, th 태그 내부의글자크기, 글꼴 설정하기 
+
+		---------------------------------------------------------------------- */
+		
+		body, form, table, table td, table th{
+			font-size: 10pt;
+			font-family:tahoma, 굴림, 돋움, verdana;
+		}
+
+		/*  --------------------------------------------------------------------------------
+		
+			table, table 안의 td, table 안의 th 태그의 가로/세로 선을 모두 단일선으로 보이기
+
+		-------------------------------------------------------------------------------- */
+
+		table, table td, table th{
+			border-collapse:collapse;
+		}
+
+	</style>
+
+	<body>
+		<center>
+
+		<!--  ----------------------------------------------------------------------
+			
+			메뉴바 출력하기
+			
+		 ---------------------------------------------------------------------- -->
+
+		<table cellspacing="0" width="100%">
+			<tr><th bgcolor="black" align="center">
+
+				<table cellspacing="0" cellpadding="7">
+					<tr>
+						<th bgcolor="#707070">
+							<font color="white">&nbsp;&nbsp;&nbsp;연락처&nbsp;&nbsp;&nbsp;</font>
+						</th>
+						<th bgcolor="black">
+							<font color="white">&nbsp;&nbsp;&nbsp;게시판&nbsp;&nbsp;&nbsp;</font>
+						</th>
+						<th bgcolor="black">
+							<font color="white">&nbsp;&nbsp;&nbsp;공지사항&nbsp;&nbsp;&nbsp;</font>
+						</th>
+					</tr>
+				</table>
+
+		</table><br><br>
+		
+		<!--  ----------------------------------------------------------------------
+			
+			검색조건 출력하기
+
+		 ---------------------------------------------------------------------- -->
+
+		<form>
+
+		<table border="1" cellspacing="0" cellpadding="20">
+		<tr><th>
+
+		<!-- ---------------------------------------------------------------------- -->
+		
+			<table border="1" cellpadding="7" cellspacing="0">
+				<caption><b>연락처검색</b><caption>
+
+				<tr>
+					<th>사업분야</th>
+					<td>
+						<input type="checkbox" name="business" value="1">IT
+						<input type="checkbox" name="business" value="2">통신
+						<input type="checkbox" name="business" value="3">금융
+						<input type="checkbox" name="business" value="4">기타
+					</td>
+				</tr>
+
+				<tr>
+					<th>등록일</th>
+					<td>
+						<select name="contact_reg_min_year" multiple="true">
+							<option value="">- - - -</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+						</select>년
+						<select name="contact_reg_min_month">
+							<option value="">- -</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>월 [이번달로][비움]~
+						
+						<select name="contact_reg_max_year">
+							<option value="">- - - -</option>
+							<option value="2016">2016</option>
+							<option value="2017">2017</option>
+							<option value="2018">2018</option>
+							<option value="2019">2019</option>
+						</select>년
+						<select name="contact_reg_max_month">
+							<option value="">- -</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>월 [이번달로][비움]&nbsp;&nbsp;[모두비움]
+
+					</td>
+				</tr>
+
+				<tr>
+					<th>키워드</th>
+					<td>
+						<input type="text" name="keyword" size="20" maxlength="20">
+					</td>
+				</tr>
+
+			</table>
+			
+			<div style="height:5;"></div>
+			<input type="button" value="                  검색                  ">
+			<input type="button" value="모두검색"> [연락처 등록] [로그아웃]
+		
+		<!-- ---------------------------------------------------------------------- -->
+
+		</tr></th>
+		</table>
+
+		<!--  ----------------------------------------------------------------------
+			
+			검색개수, 페이징 번호 출력하기
+
+		 ----------------------------------------------------------------------	-->
+
+		<br>[검색 개수 : 181개]<br><br>
+		<b>1</b> [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15]&nbsp; [다음] [마지막]&nbsp;&nbsp;
+
+		<select name="row_cnt_per_page">
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="30">30</option>
+			<option value="35">35</option>
+			<option value="40">40</option>
+			<option value="45">45</option>
+		</select> 행보기<p>
+
+		<!--  ----------------------------------------------------------------------
+			
+			검색결과물 출력하기
+
+		---------------------------------------------------------------------- -->
+
+		<table cellspacing="0" cellpadding="9">
+			<tr bgcolor="#707070">
+				<th>번호</th>
+				<th>연락처명</th>
+				<th>전화</th>
+				<th>사업분야</th>
+				<th>등록일</th>
+			</tr>
+			<tr align="center">
+				<td>181</td>
+				<td>현상주</td>
+				<td>00</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center" bgcolor="#707070">
+				<td>180</td>
+				<td>옥영학</td>
+				<td>01089597983</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center">
+				<td>179</td>
+				<td>정준모</td>
+				<td>01050300144</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center" bgcolor="#707070">
+				<td>178</td>
+				<td>김광범</td>
+				<td>01067870428</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center">
+				<td>177</td>
+				<td>김승수</td>
+				<td>01033654453</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center" bgcolor="#707070">
+				<td>176</td>
+				<td>남민지</td>
+				<td>01041221108</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center">
+				<td>175</td>
+				<td>이소영</td>
+				<td>01023844039</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center" bgcolor="#707070">
+				<td>174</td>
+				<td>황인호</td>
+				<td>01048015126</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center">
+				<td>173</td>
+				<td>안희수</td>
+				<td>01067888618</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+			<tr align="center" bgcolor="#707070">
+				<td>172</td>
+				<td>박예원</td>
+				<td>01025916803</td>
+				<td>IT</td>
+				<td>2018-01-30</td>
+			</tr>
+		</table>
+
+		</form>
+
+		
+
+
+		
+
+	</body>
+</html>

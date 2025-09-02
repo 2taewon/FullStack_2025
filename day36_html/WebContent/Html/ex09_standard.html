@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex09_standard.html</title>
+<style type = "text/css">
+	* {
+	font-family : serif, fanasy, 궁서, 굴림;
+	}
+</style>
+<link href ="../Css/main.css" rel = "stylesheet">
+</head>
+<body>
+<img alt = "css test" src = "../images/2.jpg">
+<img alt = "test" src ="../images/1.jpg" style = "border : 5px solid; border-color: pink">
+<hr>
+선택자를 div를 <div id = "multi"> <em>여러개</em></div> 있을 경우 
+선택자를 div를 <p><em>여러개 </em></p>있을 경우 
+
+<!--
+      E:가상선택자 <--- 대화형컨텐츠
+      E::가상요소 <--- E::before    E::after
+      E:nth-child(n)  <--- E:nth-child(2) 
+      E:nth-child(2n)  <--- E:nth-child(2n) 
+      E:nth-of-type(n)
+      E:not(s) <---  .fruits  div:not(.strawberry) 
+-->
+
+<nav class = "navi">
+	<ul>
+		<li><a href ="#">애완견 종류</a></li>
+		<li><a href ="#">입양하기</a></li>
+		<li><a href ="#">건강돌보기</a></li>
+		<li><a href ="#">더불어 살기</a></li>
+	</ul>
+</nav>
+	<ul>
+		<li><a href ="#">애완견 종류</a></li>
+		<li><a href ="#">입양하기</a></li>
+		<li><a href ="#">건강돌보기</a></li>
+		<li><a href ="#">더불어 살기</a></li>
+	</ul>
+	<ul id = "ul">
+		<li><a href ="#">애완견 종류</a></li>
+		<li><a href ="#">입양하기</a></li>
+		<li><a href ="#">건강돌보기</a></li>
+		<li><a href ="#">더불어 살기</a></li>
+	</ul>
+<p>
+	이제 <span class ="accent">웹표준</span>의 역할은 
+	아주 <span class ="accent">중요</span> 합니다.
+</p>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+
+	</head>
+	
+	<body>
+		<script>
+			//u_name이란 변수를 선언하고 김도경이란 문자 데이터를 저장하기
+			var u_name = "김도경";
+			
+			//kor이란 변수를 선언하고 국어점수 90점을 저장하기
+			var kor = -20;
+
+			//eng이란 변수를 선언하고 영어점수 80을 저장하기
+			var eng = -70;
+			
+			//avg이란 변수를 선언하고 평균을 저장하기
+			var avg = (kor+eng)/2;
+			
+			
+			
+			//영어, 국어 점수 다 이상한 경우
+			if((eng<0 || eng >100) && (kor<0 || kor >100)){
+					document.write("두 점수 다 제대로 입력하세요");
+			}
+			//국어 점수 이상한 경우
+			else if(kor<0 || kor >100){
+					document.write("국어점수 제대로 입력하세요");
+			}
+			//영어 점수 이상한경우
+			else if(eng<0 || eng >100){
+					document.write("영어점수 제대로 입력하세요");
+			}
+			//그 이외의 경우
+			else{
+				//만약에 평균점수가 0~100사이이면
+				if(100>=avg && avg>=90){
+					
+					document.write("A");
+
+				}
+				//만약에 평균점수 80이상 90미만이면 A학점 출력
+				else if(90>avg && avg>=80){
+					
+					document.write("B");
+
+				}
+				//만약에 평균점수 70이상 80미만이면 A학점 출력
+				else if(80>avg && avg>=70){
+					
+					document.write("C");
+
+				}
+				//만약에 평균점수 60이상~70미만이면 A학점 출력
+				else if(70>avg && avg>=60){
+					
+					document.write("D");
+
+				}
+				//만약에 평균점수 0이상 60미만이면 A학점 출력
+				else if(60>avg && avg>=0){
+					
+					document.write("F");
+
+				}
+				
+			}
+
+
+//-------------------------------------------------------------------------------------
+
+
+		
+
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+     
+
+</head>
+<body>
+
+
+ <h2>작업처리</h2>
+
+ <p>작업처리:<progress id="p" value="0.5" max="1.0"></progress><span id="s">0</span>%</p>
+
+ <script>
+
+  var progressBar = document.getElementById('p');
+
+  function updateProgress(newValue) {
+
+    progressBar.value = newValue;
+
+   //document.getElementsById('s').innerHTML = newValue;
+   $('span').html(newValue);
+
+  }
+  setInterval(function(){
+		updateProgress(Math.random());
+	},500);
+ </script>
+
+</body>
+</html>

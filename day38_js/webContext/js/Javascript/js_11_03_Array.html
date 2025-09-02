@@ -1,0 +1,87 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script>
+		//------------------------------
+		// 0~6 까지의 숫자를 요일문자로 바꿔 리턴하는 함수
+		//--------------------------------
+			function getWeek(num){
+			/*
+				var yoil="일";
+				if ( num == 1 ) { yoil = "월" }
+				else if ( num == 2 ) { yoil = "화" }
+				else if ( num == 3 ) { yoil = "수" }
+				else if ( num == 4 ) { yoil = "목" }
+				else if ( num == 5 ) { yoil = "금" }
+				else if ( num == 6 ) { yoil = "토" }
+				return yoil;
+			*/
+				var yoil = ["일","월","화","수","목","금","토"];
+				return yoil[num];
+			}
+		</script>
+	</head>
+	
+	<body>
+		<script>
+			//------------------
+			//현재 시스템 날짜를 관리하는 Date 객체 생성
+			//--------------------
+			var today = new Date();
+			document.write(
+				"현재 시간 => "
+				+ today.getFullYear() + "년 "
+				+ (today.getMonth()+1) + "월 "
+				+ today.getDate()+ "일 "
+				+ getWeek( today.getDay() ) + "요일 "
+				+ today.getHours()+ "시 "
+				+ today.getMinutes()+ "분 "
+				+ today.getSeconds()+ "초 " + "<br><hr>"
+				);
+			//------------------
+			//나 생일 관리하는 Date 객체 생성
+			//--------------------
+			var birth = new Date(1993,11,20);
+			document.write(
+				"내 생일 => "
+				+ birth.getFullYear() + "년 "
+				+ (birth.getMonth()+1) + "월 "
+				+ birth.getDate()+ "일 "
+				+ getWeek( birth.getDay() ) + "요일 "
+				+ birth.getHours()+ "시 "
+				+ birth.getMinutes()+ "분 "
+				+ birth.getSeconds()+ "초 " + "<br><hr>"
+				);
+			//-----------------------
+			// 나 태어난날부터 오늘날까지 몇 일 흘렀는지 일수를 알아내기
+			//-------------------------
+			var interval = (today.getTime()-birth.getTime())/(1000*60*60*24);
+			document.write("내가 태어난지  " + interval + " 일<hr>" );
+			//-------------------------
+			//2019.2의 마지막 날짜를 출력하면
+			//-------------------------
+			var february = new Date(2019,2,0);
+			document.write("2019년 2월의 마지막 날짜는 " + february.getDate()+ "일<hr>");
+			//-------------------------
+			//2019.2.18일부터 100일쨰 되는날은?
+			//-------------------------
+			var hundred = new Date(2019,1,18+100);
+			document.write("2019년 2월 19일 부터 100일 되는 날은 "
+				+  hundred.getFullYear() + "년 "
+				+ ( hundred.getMonth()+1) + "월 "
+				+  hundred.getDate() +"일<hr> ");
+
+			//-------------------------
+			//오늘 날짜 즉 시스템 날짜에서 111일 후의 년, 월, 일 을 출력하면
+			//-------------------------
+			var yyy = new Date();
+			yyy.setDate(yyy.getDate()+111);
+			document.write("오늘날짜부터 111일 되는 날은 "
+				+  yyy.getFullYear() + "년 "
+				+ ( yyy.getMonth()+1 ) + "월 "
+				+  yyy.getDate() +"일<hr> ");
+			
+
+		</script>
+	</body>
+</html>

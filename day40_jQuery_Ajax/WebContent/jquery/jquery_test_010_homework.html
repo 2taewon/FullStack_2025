@@ -1,0 +1,68 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				
+				//var skillObj=$("#skills select");
+				var chkSkill="";
+				$("[name=skill1]").change( function( ){
+
+					chkSkill = $(this).val();
+					$("[name=skill2]").empty();
+					
+					
+					$("[name=skill2]").append("<option value =" +1+ ">"+1);
+					$("[name=skill2]").append("<option value =" +2+ ">"+2);
+/*
+					$("[name=skill2]").each(function(){
+						
+					});
+*/
+				});
+
+			});
+		</script>
+	</head>
+	
+	<body><center>
+		<span id="skills">
+		[소유스킬] : 
+		<select name="skill1">
+			<option value = "">
+			<option value = "JSP">JSP
+			<option value = "ASP">ASP
+			<option value = "PHP">PHP
+			<option value = "JAVA">JAVA
+			<option value = "Oracle">Oracle
+		</select>
+		<select name="skill2">
+			<option value = "">
+			<option value = "JSP">JSP
+			<option value = "ASP">ASP
+			<option value = "PHP">PHP
+			<option value = "JAVA">JAVA
+			<option value = "Oracle">Oracle
+		</select>
+		<!--
+		<select name="skill3">
+			<option value = "">
+			<option value = "JSP">JSP
+			<option value = "ASP">ASP
+			<option value = "PHP">PHP
+			<option value = "JAVA">JAVA
+			<option value = "Oracle">Oracle
+		</select>
+		<select name="skill4">
+			<option value = "">
+			<option value = "JSP">JSP
+			<option value = "ASP">ASP
+			<option value = "PHP">PHP
+			<option value = "JAVA">JAVA
+			<option value = "Oracle">Oracle
+		</select>
+		-->
+		</span>
+	</body>
+</html>

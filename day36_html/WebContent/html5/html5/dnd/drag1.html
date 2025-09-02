@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<style type="text/css">
+		#boxA, #boxB {
+		   float:left;padding:10px;margin:10px;-moz-user-select:none;
+		}
+		#boxA { width:75px; height:75px;  }
+		#boxB { background-color: #FF6699; width:150px; height:150px; }
+	</style>
+	<script type="text/javascript">
+		function dragStart(ev) {
+			document.getElementById("msg").innerHTML = "onDragStart->";
+		   ev.dataTransfer.effectAllowed='move';
+		   ev.dataTransfer.setData("Text", ev.target.id);
+		   ev.dataTransfer.setDragImage(ev.target,0,0);
+		   return true;
+		}
+		function dragEnter(ev) {
+			document.getElementById("msg").innerHTML = "onDragEnter->onDragEnter->onDragEnter->onDragEnter->onDragEnter->";
+		   event.preventDefault();
+		   return true;
+		}
+		function dragOver(ev) {
+			
+			document.getElementById("msg").innerHTML = "onDragOver->";
+			return false;
+		}
+		function dragDrop(ev) {
+			document.getElementById("msg").innerHTML = "onDragDrop->";
+		   var src = ev.dataTransfer.getData("Text");
+		   ev.target.appendChild(document.getElementById(src));
+		   ev.stopPropagation();
+		   return false;
+		}
+	</script>
+	</head>
+	<body>
+		
+		<h2>Drag and drop HTML5 demo</h2>
+		<div>Try to move the purple box into the pink box.</div>
+		
+		<div id="boxA" draggable="true" ondragstart="return dragStart(event)">
+		   <p><img src = "../../../images/Whiplash.jpg" width = 100px; height = 100px;></p>
+		</div>
+		<div id="boxB" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" 
+			 ondragover="return dragOver(event)">FW</div>
+		
+		<div id="boxB" ondragenter="return dragEnter(event)" ondrop="return dragDrop(event)" 
+			 ondragover="return dragOver(event)">DF</div>
+		<div id="msg"></div>
+	</body>
+</html>

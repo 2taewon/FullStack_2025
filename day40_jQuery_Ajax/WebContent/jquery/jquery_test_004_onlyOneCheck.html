@@ -1,0 +1,31 @@
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready( function(){
+				var obj = $("[name=hobby]");
+				obj.change( function(){
+					//$("[name=hobby]").prop("checked",false);
+					//$(this).prop("checked",true);
+
+					var no = $("[name=hobby]:checked").length; 
+					if (no >1){
+						obj.prop("checked",false);
+						$(this).prop("checked",true);
+					}
+
+					//$(this).siblings().prop("checked",false);
+
+				});
+			});
+		</script>
+	</head>
+	
+	<body>
+		<input type="checkbox" name="hobby" value="독서">독서<br>
+		<input type="checkbox" name="hobby" value="운동" >운동<br>
+		<input type="checkbox" name="hobby" value="여행">여행<br>
+		<input type="checkbox" name="hobby" value="수집" >수집
+	</body>
+</html>
