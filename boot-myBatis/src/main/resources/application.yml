@@ -1,0 +1,12 @@
+#Oracle setting
+spring:
+  sql:
+    init:
+      platform: oracle     # DB 플랫폼명 (schema-*.sql 등에서 사용)
+      encoding: UTF-8    # SQL 파일의 인코딩
+      mode: always         # 항상 schema.sql, data.sql 실행
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: tw
+    password: oracle
+    driver-class-name: oracle.jdbc.OracleDriver

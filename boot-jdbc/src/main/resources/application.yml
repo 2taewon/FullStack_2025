@@ -1,0 +1,35 @@
+#Oracle setting
+spring:
+  sql:
+    init:
+      platform: oracle     # DB 플랫폼명 (schema-*.sql 등에서 사용)
+      encoding: UTF-8    # SQL 파일의 인코딩
+      mode: always         # 항상 schema.sql, data.sql 실행
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: tw
+    password: oracle
+    driver-class-name: oracle.jdbc.OracleDriver
+
+#spring.sql.init.platform  DB 종류를 지정해 schema-oracle.sql, data-oracle.sql 등 자동 실행에 사용됨
+#spring.sql.init.encoding  SQL 초기화 파일 인코딩 (기본은 UTF-8)
+#spring.sql.init.mode  SQL 초기화 실행 조건
+#always: 항상 실행
+#embedded: 내장 DB일 때만 실행
+#never: 실행 안 함
+#spring.datasource.url JDBC URL. @localhost:1521:xe는 오라클 Express Edition 기본 포트
+#driver-class-name Oracle JDBC 드라이버 클래스명
+#username/password DB 로그인 계정 정보
+#MySql setting
+#spring:
+#sql:
+#init:
+#platform: mysql
+#encoding: UTF-8
+#mode: always
+#datasource:
+#dbcp2:       # dbcp2는 커넥션 풀 설정인데, Spring Boot 2.x 이후엔 hikariCP가 기본입니다.
+#driver: com.mysql.jdbc.Driver
+#username: 사용자명
+#password: 비밀번호
+#url: jdbc:mysql://localhost/sampleDB?createDatabaseIfNotExist=true
