@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ex03.default_constructor","l":"MainEntry"}];updateSearchResults();

@@ -1,0 +1,36 @@
+//package ex01_lambda;
+//
+//interface Message {
+//	int something(); // int return 매개변수
+//}
+//
+//class Person {
+//	public void greeting(Message msg) {
+//		int su = msg.something();
+//		System.out.println("Message interface something " + su );
+//	}
+//}
+//
+//public class MainEntry2 {
+//	public static void main(String[] args) {
+//		Person p = new Person();
+//		
+//		p.greeting(new Message() { // 일반적인 형태 
+//			@Override
+//			public int something() {
+//				System.out.println("return type 안녕");
+//				System.out.println("수고많았습니다");
+//				return 100;
+//				
+//			}	
+//		});
+////		public int sum ( int x, int y ) { return x + y; }
+////		(x, y) -> { x + y;} // 여기서 return 생략 가능ㅡ
+//		System.out.println("----------------------------------");
+//		p.greeting(() -> {
+//			System.out.println("lambda 안녕");
+//			System.out.println("lambda ㅎ");
+//			return 200;
+//		});
+//	}
+//}
